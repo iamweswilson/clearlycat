@@ -1,0 +1,19 @@
+# general settings
+name: OpenStack
+markdown: redcarpet
+highlighter: pygments # or rouge or null
+exclude: ["node_modules", "gulpfile.js", "package.json"]
+
+# Setting for image liquid tag
+image:
+  source: images/_fullsize
+  output: generated
+  presets:
+    users:
+      attr:
+        class: user-portrait
+        itemprop: image
+      width: 350
+    half:
+      width: 400
+      height: 400

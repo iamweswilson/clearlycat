@@ -1,0 +1,22 @@
+#
+# YAML file that populates the top menu
+#
+# Each item begins with a dash and needs an id, title, and link.
+# subnav is an optional collection of items that will appear in a pulldown menu
+#
+
+- id: home
+  title: Home
+
+- id: portfolio
+  title: Portfolio
+
+- id: about
+  title: About Us
+
+- id: articles
+  title: Articles
+
+- id: join
+  title: Join Us
+

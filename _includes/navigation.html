@@ -1,0 +1,40 @@
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobile-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">
+                	<img class="header-logo" src="/images/scaleworks-logo.svg" onerror="this.onerror=null; this.src=/images/scaleworks-logo.png" alt="Scaleworks">
+                </a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="mobile-nav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+					{% for link in site.data.navigation %}
+					    {% assign current = nil %}
+					    {% if page.url == link.url %}
+					        {% assign current = 'active' %}
+					    {% endif %}
+					    <li class="page-scroll {{ current }}">
+					        <a href="#{{ link.id }}">{{ link.title }}</a>
+					    </li>
+					{% endfor %}
+                    <li>
+                        <a class="phone-link">
+                            210.123.4567 <i class="fa fa-phone"></i></li>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
