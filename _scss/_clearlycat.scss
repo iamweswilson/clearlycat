@@ -16,31 +16,31 @@
 	    width: 85px;
 	}
 	.navbar-default {
-		background-color: #0085a1;
-		border-color: #0085a1;
+		background-color: #000;
+		border-color: #000;
 		.navbar-nav>li>a {
 			color: white;
 		}
 		.navbar-collapse, .navbar-default .navbar-form {
-			border-color: #0085a1;
+			border-color: #000;
 		}
 		.navbar-toggle {
 			border-color: transparent;
 			&:hover, &:focus {
-				background-color: #005E78;
+				background-color: #777;
 				.icon-bar {
-					background-color: #0085a1;
+					background-color: #000;
 				}
 			}
 			.icon-bar {
-				background-color: #005E78;
+				background-color: #777;
 			}
 		}
 	}
 }
 a.resource-btn {
-    background-color: #0085a1;
-    border: 1px solid #0085a1;
+    background-color: #000;
+    border: 1px solid #000;
     color: white;
     font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     text-transform: uppercase;
@@ -52,8 +52,8 @@ a.resource-btn {
     text-decoration: none;
     &:hover, &:focus {
     	text-decoration: none;
-    	background: #005E78;
-    	border-color: #005E78;
+    	background: #777;
+    	border-color: #777;
     }
 }
 .pinterestBoardWrapper {
