@@ -1,12 +1,70 @@
+.navbar-brand {
+	padding: 0px;
+}
+.navbar-brand>img {
+	height: auto;
+	padding: 0;
+	width: 140px;
+	&:hover {
+		cursor: pointer;
+	}
+}
+@media (max-width: 767px) {
+	.navbar-brand>img {
+		max-height: 40px;
+	    margin: 5px;
+	    width: 85px;
+	}
+	.navbar-default {
+		background-color: #0085a1;
+		border-color: #0085a1;
+		.navbar-nav>li>a {
+			color: white;
+		}
+		.navbar-collapse, .navbar-default .navbar-form {
+			border-color: #0085a1;
+		}
+		.navbar-toggle {
+			border-color: transparent;
+			&:hover, &:focus {
+				background-color: #005E78;
+				.icon-bar {
+					background-color: #0085a1;
+				}
+			}
+			.icon-bar {
+				background-color: #005E78;
+			}
+		}
+	}
+}
+a.resource-btn {
+    background-color: #0085a1;
+    border: 1px solid #0085a1;
+    color: white;
+    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    border-radius: 0;
+    padding: 15px 25px;
+    text-decoration: none;
+    &:hover, &:focus {
+    	text-decoration: none;
+    	background: #005E78;
+    	border-color: #005E78;
+    }
+}
 .pinterestBoardWrapper {
-  width: 100%;
-  margin: auto;
+	width: 100%;
+	margin: auto;
 }
 .pinterestBoard {
-  margin: auto;
-  text-align: center;
+	margin: auto;
+	text-align: center;
 }
 .pinterestBoard span {
-  overflow: hidden;
-  max-width: 100%!important;
+	overflow: hidden;
+	max-width: 100%!important;
 }

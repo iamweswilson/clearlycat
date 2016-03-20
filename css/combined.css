@@ -1,3 +1,51 @@
+.navbar-brand {
+  padding: 0px; }
+
+.navbar-brand > img {
+  height: auto;
+  padding: 0;
+  width: 140px; }
+  .navbar-brand > img:hover {
+    cursor: pointer; }
+
+@media (max-width: 767px) {
+  .navbar-brand > img {
+    max-height: 40px;
+    margin: 5px;
+    width: 85px; }
+  .navbar-default {
+    background-color: #0085a1;
+    border-color: #0085a1; }
+    .navbar-default .navbar-nav > li > a {
+      color: white; }
+    .navbar-default .navbar-collapse, .navbar-default .navbar-default .navbar-form {
+      border-color: #0085a1; }
+    .navbar-default .navbar-toggle {
+      border-color: transparent; }
+      .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+        background-color: #005E78; }
+        .navbar-default .navbar-toggle:hover .icon-bar, .navbar-default .navbar-toggle:focus .icon-bar {
+          background-color: #0085a1; }
+      .navbar-default .navbar-toggle .icon-bar {
+        background-color: #005E78; } }
+
+a.resource-btn {
+  background-color: #0085a1;
+  border: 1px solid #0085a1;
+  color: white;
+  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  border-radius: 0;
+  padding: 15px 25px;
+  text-decoration: none; }
+  a.resource-btn:hover, a.resource-btn:focus {
+    text-decoration: none;
+    background: #005E78;
+    border-color: #005E78; }
+
 .pinterestBoardWrapper {
   width: 100%;
   margin: auto; }
