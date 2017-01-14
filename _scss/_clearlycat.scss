@@ -68,3 +68,11 @@ a.resource-btn {
 	overflow: hidden;
 	max-width: 100%!important;
 }
+img.resource-graphic {
+	max-width:100%;
+	height:auto;
+	border: 3px solid #eee;
+	&:hover, &:focus {
+		border-color: #1295D5;
+	}
+}
