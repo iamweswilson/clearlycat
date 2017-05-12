@@ -1,40 +1,40 @@
-<!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#ambitious-navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span> 
-            </button>
-            <a class="navbar-brand" href="/"><img src="/img/logo.svg" onerror="this.onerror=null; this.src=img/logo.png" alt="Ambitious">
-            </a>    
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobile-nav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#page-top">
+                	<img class="header-logo" src="/images/scaleworks-logo.svg" onerror="this.onerror=null; this.src=/images/scaleworks-logo.png" alt="Scaleworks">
+                </a>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="mobile-nav">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+					{% for link in site.data.navigation %}
+					    {% assign current = nil %}
+					    {% if page.url == link.url %}
+					        {% assign current = 'active' %}
+					    {% endif %}
+					    <li class="page-scroll {{ current }}">
+					        <a href="#{{ link.id }}">{{ link.title }}</a>
+					    </li>
+					{% endfor %}
+                    <li>
+                        <a class="phone-link">
+                            210.123.4567 <i class="fa fa-phone"></i></li>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="ambitious-navbar">
-            <ul class="nav navbar-nav navbar-left">
-                <li class="search-wrapper">
-                    <input type="input" name="search" value="" placeholder="Search">
-                </li>
-                <li>
-                    <a class="profile-link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <div class="avatar" style="background-image:url('/img/avatars/wes.jpeg')"></div>
-                        <div class="name">
-                            Wes
-                            <img src="/img/icons/arrow-down.svg" alt="">
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="dLabel">
-                        <li>Profile</li>
-                        <li>Log Out</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+        <!-- /.container-fluid -->
+    </nav>
