@@ -1,5 +1,5 @@
 # general settings
-name: OpenStack
+name: Thinking In Common
 markdown: redcarpet
 highlighter: pygments # or rouge or null
 exclude: ["node_modules", "gulpfile.js", "package.json"]
