@@ -16,5 +16,9 @@
     "gulp-sass": "^2.1.1",
     "gulp-watch": "^4.3.11"
   },
-  "private": true
+  "private": true,
+  "dependencies": {
+    "browser-sync": "^1.9.2",
+    "node-sass": "^4.9.0"
+  }
 }
