@@ -25,6 +25,9 @@ var config_default = defineConfig({
         label: "Pages",
         path: "content/pages",
         format: "json",
+        match: {
+          exclude: "training-resources"
+        },
         fields: [
           {
             type: "string",
@@ -87,6 +90,123 @@ var config_default = defineConfig({
             ui: {
               component: "textarea"
             }
+          }
+        ]
+      },
+      {
+        name: "training_resources",
+        label: "Training Resources",
+        path: "content/pages",
+        format: "json",
+        match: {
+          include: "training-resources"
+        },
+        ui: {
+          filename: {
+            readonly: true,
+            slugify: () => "training-resources"
+          }
+        },
+        fields: [
+          {
+            type: "string",
+            name: "title",
+            label: "Page Title",
+            required: true
+          },
+          {
+            type: "string",
+            name: "heading",
+            label: "Heading",
+            required: true
+          },
+          {
+            type: "string",
+            name: "subheading",
+            label: "Subheading"
+          },
+          {
+            type: "image",
+            name: "backgroundImage",
+            label: "Background Image"
+          },
+          {
+            type: "object",
+            name: "resources",
+            label: "Resources",
+            list: true,
+            ui: {
+              itemProps: (item) => {
+                return { label: item?.title || "New Resource" };
+              }
+            },
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Title",
+                required: true
+              },
+              {
+                type: "object",
+                name: "links",
+                label: "Links",
+                list: true,
+                ui: {
+                  itemProps: (item) => {
+                    return { label: item?.text || "New Link" };
+                  }
+                },
+                fields: [
+                  {
+                    type: "string",
+                    name: "text",
+                    label: "Link Text",
+                    required: true
+                  },
+                  {
+                    type: "string",
+                    name: "url",
+                    label: "URL",
+                    required: true
+                  }
+                ]
+              },
+              {
+                type: "object",
+                name: "images",
+                label: "Images",
+                list: true,
+                ui: {
+                  itemProps: (item) => {
+                    return { label: item?.alt || "Image" };
+                  }
+                },
+                fields: [
+                  {
+                    type: "image",
+                    name: "src",
+                    label: "Image",
+                    required: true
+                  },
+                  {
+                    type: "string",
+                    name: "alt",
+                    label: "Alt Text"
+                  },
+                  {
+                    type: "string",
+                    name: "link",
+                    label: "Image Link (URL)"
+                  }
+                ]
+              },
+              {
+                type: "boolean",
+                name: "showDivider",
+                label: "Show Divider After Resource"
+              }
+            ]
           }
         ]
       }

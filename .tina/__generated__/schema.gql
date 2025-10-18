@@ -56,10 +56,13 @@ type Query {
   document(collection: String, relativePath: String): DocumentNode!
   page(relativePath: String): Page!
   pageConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: PageFilter): PageConnection!
+  training_resources(relativePath: String): Training_resources!
+  training_resourcesConnection(before: String, after: String, first: Float, last: Float, sort: String, filter: Training_resourcesFilter): Training_resourcesConnection!
 }
 
 input DocumentFilter {
   page: PageFilter
+  training_resources: Training_resourcesFilter
 }
 
 type DocumentConnectionEdges {
@@ -85,7 +88,7 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Folder
+union DocumentNode = Page | Training_resources | Folder
 
 type Page implements Node & Document {
   title: String!
@@ -139,6 +142,77 @@ type PageConnection implements Connection {
   edges: [PageConnectionEdges]
 }
 
+type Training_resourcesResourcesLinks {
+  text: String!
+  url: String!
+}
+
+type Training_resourcesResourcesImages {
+  src: String!
+  alt: String
+  link: String
+}
+
+type Training_resourcesResources {
+  title: String!
+  links: [Training_resourcesResourcesLinks]
+  images: [Training_resourcesResourcesImages]
+  showDivider: Boolean
+}
+
+type Training_resources implements Node & Document {
+  title: String!
+  heading: String!
+  subheading: String
+  backgroundImage: String
+  resources: [Training_resourcesResources]
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+input Training_resourcesResourcesLinksFilter {
+  text: StringFilter
+  url: StringFilter
+}
+
+input Training_resourcesResourcesImagesFilter {
+  src: ImageFilter
+  alt: StringFilter
+  link: StringFilter
+}
+
+input BooleanFilter {
+  eq: Boolean
+  exists: Boolean
+}
+
+input Training_resourcesResourcesFilter {
+  title: StringFilter
+  links: Training_resourcesResourcesLinksFilter
+  images: Training_resourcesResourcesImagesFilter
+  showDivider: BooleanFilter
+}
+
+input Training_resourcesFilter {
+  title: StringFilter
+  heading: StringFilter
+  subheading: StringFilter
+  backgroundImage: ImageFilter
+  resources: Training_resourcesResourcesFilter
+}
+
+type Training_resourcesConnectionEdges {
+  cursor: String!
+  node: Training_resources
+}
+
+type Training_resourcesConnection implements Connection {
+  pageInfo: PageInfo!
+  totalCount: Float!
+  edges: [Training_resourcesConnectionEdges]
+}
+
 type Mutation {
   addPendingDocument(collection: String!, relativePath: String!, template: String): DocumentNode!
   updateDocument(collection: String, relativePath: String!, params: DocumentUpdateMutation!): DocumentNode!
@@ -147,15 +221,19 @@ type Mutation {
   createFolder(collection: String, relativePath: String!): DocumentNode!
   updatePage(relativePath: String!, params: PageMutation!): Page!
   createPage(relativePath: String!, params: PageMutation!): Page!
+  updateTraining_resources(relativePath: String!, params: Training_resourcesMutation!): Training_resources!
+  createTraining_resources(relativePath: String!, params: Training_resourcesMutation!): Training_resources!
 }
 
 input DocumentUpdateMutation {
   page: PageMutation
+  training_resources: Training_resourcesMutation
   relativePath: String
 }
 
 input DocumentMutation {
   page: PageMutation
+  training_resources: Training_resourcesMutation
 }
 
 input PageMutation {
@@ -168,6 +246,32 @@ input PageMutation {
   body: String
   paragraph1: String
   paragraph2: String
+}
+
+input Training_resourcesResourcesLinksMutation {
+  text: String
+  url: String
+}
+
+input Training_resourcesResourcesImagesMutation {
+  src: String
+  alt: String
+  link: String
+}
+
+input Training_resourcesResourcesMutation {
+  title: String
+  links: [Training_resourcesResourcesLinksMutation]
+  images: [Training_resourcesResourcesImagesMutation]
+  showDivider: Boolean
+}
+
+input Training_resourcesMutation {
+  title: String
+  heading: String
+  subheading: String
+  backgroundImage: String
+  resources: [Training_resourcesResourcesMutation]
 }
 
 schema {

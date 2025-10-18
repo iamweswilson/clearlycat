@@ -20,58 +20,27 @@
           Are you looking for a strategy, tool, or other resource that was shared at one of my recent trainings or seminars? That's what this page is all about. I've created dozens of resources, and am passionate about getting to share them with you for you to use with your students--and they are all free! If you don't see something or have trouble finding something from the seminar you attended, please <NuxtLink to="/contact" class="text-primary hover:underline">contact me</NuxtLink>.
         </p>
 
-        <!-- Resource Sections (Before Infographics) -->
-        <div v-for="resource in resourcesBeforeInfographics" :key="resource.title" class="mb-8">
+        <!-- All Resources -->
+        <div v-for="resource in resources" :key="resource.title" class="mb-8">
           <h3 class="text-2xl font-bold mb-3">{{ resource.title }}</h3>
+          
+          <!-- Links -->
           <div v-for="link in resource.links" :key="link.url" class="mb-2">
             <a :href="link.url" class="resource-btn" target="_blank">
               {{ link.text }}
             </a>
           </div>
-          <div v-if="resource['hasImage']" class="mt-4">
-            <a :href="resource['imageLink']" target="_blank">
-              <img :src="resource['imageUrl']" alt="" class="resource-graphic">
-            </a>
+          
+          <!-- Images Gallery -->
+          <div v-if="resource.images && resource.images.length > 0" class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div v-for="(image, index) in resource.images" :key="index">
+              <a v-if="image.link" :href="image.link" target="_blank">
+                <img :src="image.src" :alt="image.alt || ''" class="resource-image">
+              </a>
+              <img v-else :src="image.src" :alt="image.alt || ''" class="resource-image">
+            </div>
           </div>
-          <hr v-if="resource.showDivider" class="my-6">
-        </div>
-
-        <!-- Infographics Section -->
-        <div class="mb-8">
-          <h3 class="text-2xl font-bold mb-3">Best Practices for Co-Teaching</h3>
-          <p class="mb-2">
-            <a href="//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing" class="resource-btn" target="_blank">
-              View All Resources
-            </a>
-          </p>
-          <p class="text-sm mb-2">Download The Infographics</p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <a href="/img/maximizeoppw_coteaching.png" target="_blank">
-              <img src="/img/maximizeoppw_coteaching.png" alt="Infographic" class="resource-graphic">
-            </a>
-            <a href="/img/coteachingapproaches1.png" target="_blank">
-              <img src="/img/coteachingapproaches1.png" alt="Infographic" class="resource-graphic">
-            </a>
-            <a href="/img/coteachingapproaches2.png" target="_blank">
-              <img src="/img/coteachingapproaches2.png" alt="Infographic" class="resource-graphic">
-            </a>
-          </div>
-          <hr class="my-6">
-        </div>
-
-        <!-- Resource Sections (After Infographics) -->
-        <div v-for="resource in resourcesAfterInfographics" :key="resource.title" class="mb-8">
-          <h3 class="text-2xl font-bold mb-3">{{ resource.title }}</h3>
-          <div v-for="link in resource.links" :key="link.url" class="mb-2">
-            <a :href="link.url" class="resource-btn" target="_blank">
-              {{ link.text }}
-            </a>
-          </div>
-          <div v-if="resource['hasImage']" class="mt-4">
-            <a :href="resource['imageLink']" target="_blank">
-              <img :src="resource['imageUrl']" alt="" class="resource-graphic">
-            </a>
-          </div>
+          
           <hr v-if="resource.showDivider" class="my-6">
         </div>
       </div>
@@ -82,13 +51,17 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 
+interface ResourceImage {
+  src: string
+  alt?: string
+  link?: string
+}
+
 interface Resource {
   title: string
   links: { text: string; url: string }[]
+  images?: ResourceImage[]
   showDivider: boolean
-  hasImage?: boolean
-  imageUrl?: string
-  imageLink?: string
 }
 
 // Import content directly from JSON file
@@ -96,460 +69,29 @@ import trainingResourcesContent from '~/content/pages/training-resources.json'
 
 const pageData = ref(trainingResourcesContent)
 
-const resourcesBeforeInfographics = ref<Resource[]>([
-  {
-    title: 'Hubert H. Humphrey Middle School',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1OkiP0Fyw8Z1kcSWh2isCHCnaLbn6Uqo9?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Weaver Union School District',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1z4u81tePwbXgX0uBHW-P9XiD9SmC5fK7?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Greenfield Union School District',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1vCU2EgA47qcKnG-8K6D_rpI6YAJkqkLA?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Guadalupe Union School District Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1q0ZLKQBHAT95LCHfgNydZTEtfOe2DfIj?usp=sharing' },
-      { text: 'Additional Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'El Camino Jr. High; Santa Maria Bonita SD',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1P4rOpyjX_CwApd0W9NZtf_j12pYoVPD1?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Stanislaus County Co-Teaching Series 2024-25',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/135w3GvJtImd-6R4uIwWlBNWS_WCPhcrJ?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Orcutt Union School District',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/138s8Z9Tsfo25aqe4iOD39MeugX78Zc6Y?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Quabbin Regional School District',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1jUQiIAFbPpdTZXoqLmk7pUfQzLDVqb9n?usp=sharing' },
-      { text: 'Additional Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Sylvan Union School District Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1gsgHwqdxa1PsRKCQwBx8dVgoGu74MIJn?usp=sharing' },
-      { text: 'Additional Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Stanislaus County Co-Teaching Series 23-24',
-    links: [
-      { text: 'Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' },
-      { text: 'Co-Teaching Cohort PLC Series', url: '//drive.google.com/drive/folders/1unPuY3BmyICka7iJARZMaK0WBqioLeQw?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Maercker School District Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1M_t4QueNeDw4BnMgeS6RtIgZO7K1hhuF?usp=sharing' },
-      { text: 'Additional Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=drive_link' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Central School District; Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1_xrEttNc-AZzzB8Mb0Gr5f9B9xiza2Q6?usp=sharing' },
-      { text: 'Additional Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Riverbank Unified School District',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1onxY-Q0nA7AHYIdg4txo7wPRvioc2oI1?usp=share_link' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Stanislaus County Co-Teaching Training 2022-23',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1q5cMRJctuuZnveImaJN5xXvcZBPLvVkB?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Grow Public Schools 2022-23',
-    links: [
-      { text: 'Co-Teaching Resources', url: '//drive.google.com/drive/folders/1n3qZh_OtcKNiNAlV19jU8L8uMQQ2H-X_?usp=sharing' },
-      { text: 'Additional Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' },
-      { text: 'Lesson Study Resources', url: '//drive.google.com/drive/folders/14uspkIDCR-3wbuRVvk4LS_8t6TospPsk?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Santa Maria Joint Unified High School District; Professional Development 2022-23',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1N97aRxV0UQG5WPBjf0V5P-2uqoIKy8lT?usp=sharing' },
-      { text: 'Additional Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Grand Canyon Unified District; Professional Development July 28, 2022',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1LFhvLaZt_BtMDmJOvqWF_jWmhfrnOuO0?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Kirby School District; Professional Development 2022',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1z-n_p8WGaHekjPhvmIVrmj4wJixMx3V9?usp=sharing' },
-      { text: 'Additional Resources', url: '//drive.google.com/drive/folders/1XwR8VLtgJKoRn4k9vLPc7XRnIcqUodsN?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'National Train the Trainer Institute: Maximizing the Effectiveness of Paraprofessionals',
-    links: [
-      { text: 'Home Base', url: '//docs.google.com/document/d/1MetiRDcc2JaC8Ow133oM5B_EuLh02BBv9UX2Sa5NlUU/edit?usp=sharing' },
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1XwR8VLtgJKoRn4k9vLPc7XRnIcqUodsN?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Truro Mass; June 28, 2022 Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1Egv76PO2xhtSZMrWs7GJEYmcg0d5Z384?usp=sharing' },
-      { text: 'Additional Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Gresham High School; June 3, 2022 Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1KOtvWR3tbN5r8ldrIru6oFC1I37SCj_6?usp=sharing' },
-      { text: 'Additional Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Saratoga Springs City School District; June 6, 2022 Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1l_sJb_Cayy0ZeHSl5XYCN7af7S3MU3b3?usp=sharing' },
-      { text: 'Additional Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Waipahu Elementary; Oct 4, 2021 Professional Development',
-    links: [
-      { text: 'Campus Resources', url: '//drive.google.com/drive/folders/1pUedAMn20Z3NxTWqY8oD0o9BpovNrjOl?usp=sharing' },
-      { text: 'Additional Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Medfield School District, August 23rd, 2021 Professional Development',
-    links: [
-      { text: 'District Resources', url: '//drive.google.com/drive/folders/1mFvszXrFM9frPWqsvY_D13yEUx6BWNGo?usp=sharing' },
-      { text: 'Additional Co-Teaching Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfY250UTM5X3FJTms?resourcekey=0-rQ_vlIT6ljargrgnpgdQ1A&usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Region 16; Sped Camp June 2021',
-    links: [
-      { text: 'Smore', url: '//www.smore.com/5nb4f' },
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/14mDMIsZTzuX8vQF2oRpm14PwUwwdgk1V?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'BER Co-Teaching 2 Day Conference; March 2021',
-    links: [
-      { text: 'Keynote Slides', url: '//drive.google.com/file/d/1A5W22JD82QvfQb4XW-BkcvY5gp0uPA6S/view?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Catching Up Your Students with Disabilities; Who Have Fallen Behind',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1IJQ2NnBDRWVWcEm7qazO1YDpqV2fskNI?usp=sharing' },
-      { text: 'Smore', url: '//www.smore.com/tgnr60' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Central Catholic Back to School PD: September 9th, 2020',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1nh9PZBrtzQELdmKUVo-VnhwMCl_gB07c?usp=sharing' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Soledad Unified School District: May 18-20th, 2020',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/open?id=1QO83foVkqibkhBwOiN6EvwvgdzwPqAUR' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Making Best Use of Universal Design for Learning',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/open?id=1CQKLnaauIQXK1eTEoEOzhuYEmTo0QCWS' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'North Rockland, NY: February, 6-7, 2020',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1k0ZTsiznIbG45ptoLRvt09TyYkzMwGgd' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Davidson County Schools: December 13, 2019',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/open?id=1y8lmIgN05oSY9wr_2DLftMHrTd06Y10U' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Archdiocese of Omaha: November 26, 2019',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/open?id=1VcshryzCt0rIGG4unI1eYBHH60CnADlc' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Winston-Salem, NC: October 14-15, 2019',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1_wlulce-UjJJBN_-1B4OH688I4cpuc1x' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'West Tisbury School, MA: October 12, 2019',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/132tC6c0AcO9U3JnfKv1ygw0ggsDvFLmu' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Archdiocese of Omaha; MATH MINDSETS: August 8th, 2019',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/132tC6c0AcO9U3JnfKv1ygw0ggsDvFLmu' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Central District Hawaii: July 25 & 26th, 2019',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/open?id=0B6LJvCVcyOwfY250UTM5X3FJTms' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Best Practices for Co-Teaching: June 12th and October 28th, 2019 Hawaii',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/open?id=0B6LJvCVcyOwfY250UTM5X3FJTms' }
-    ],
-    showDivider: false
-  },
-  {
-    title: 'Soledad Unified School District: April 9th, 2019',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/open?id=13w6MaJNz_u5iNknoxgG-9IWyQvTb0QpK' }
-    ],
-    showDivider: false
-  }
-])
-
-const resourcesAfterInfographics = ref<Resource[]>([
-  {
-    title: 'Help Students Develop a Positive Growth Mindset (2 Day Conference)',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1liiHF89PbYnL9rhqOa-hEjzAOujBp1AM?usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'MOTIVATION, MINDSET and GRIT: Practical, Proven Strategies to Increase Learning',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfZC1IRW41bDExOFE?resourcekey=0-37Dsg4FHdXeii2KA_3hbPA&usp=drive_link' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Central Catholic High School: August 15th and September 5th',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfZC1IRW41bDExOFE?usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Lansing Eastern High School: August 10, 2018',
-    links: [
-      { text: 'View All Resources', url: '//www.dropbox.com/sh/ceioryelna207mm/AAC26o_DN-nB1u1ajIN9bRtva?dl=0' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Tornillo Independent School District: August 7, 2018',
-    links: [
-      { text: 'View All Resources', url: '//www.dropbox.com/sh/usmxif0ln3hcljz/AACOPi6yimhEsJgSuT9fFCY1a?dl=0' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Westside Union School District: August 2nd & 3rd, 2018',
-    links: [
-      { text: 'MORE THAN PRAISE: The Importance of Feedback in the Growth Mindset Classroom', url: '//www.dropbox.com/sh/r3yxlp6ctwfex3h/AADjkIkWff4wspuZpLVUqVTJa?dl=0' },
-      { text: 'GETTING GRITTY: Building Perseverance in Today\'s Students', url: '//www.dropbox.com/sh/l0k73bhh1439rov/AAAbgLp87VS63mwIjTZ36G7ma?dl=0' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Waverly Community Schools: June 27, 2018',
-    links: [
-      { text: 'View All Resources', url: '//www.dropbox.com/sh/yanhn74cpo0slbc/AABPhfvYs7zbz9cN3Bu_RJpIa?dl=0' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'MSAD #51, Cumberland, ME June 26, 2018',
-    links: [
-      { text: 'View All Resources', url: '//www.dropbox.com/sh/j5exh31gnbu540h/AAA59Uc9q_A2668y9KYpO7Dqa?dl=0' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Elko County School District: May 7, 2018',
-    links: [
-      { text: 'View All Resources', url: '//www.dropbox.com/sh/d8mlfracqo24179/AABBpvUDM1aA-SypXjfjr7M5a?dl=0' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Improving Co-Teaching Through Thinking Routines',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/121DeomCkpQuZQ5YdO1gzdoMW0r94bcvF?usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Critical Conversations; Saying What You Mean Without Being Mean (For Co-Teachers)',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1ulawhz-7h4ymdD4KQKxBhA5hFTQtp3Oq?usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Co-Assessing & Co-Improving in the Co-Taught Classroom',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/1uuO-zs3hePFo_wTmpIhpSuszWdnFeRpj?usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Oak Harbor Public Schools: August 21-22, 2017',
-    links: [
-      { text: 'View All Resources', url: '//bit.ly/oakharborresources' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'The Power of 3: Co-Teaching with Technology',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfRHZSTzU2Skl0bEU?resourcekey=0-ew5mAQ3D4gFG_bQwV39NZQ&usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'What\'s Missing From Co-Teaching',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfOVRFYXVDOW53QWs?resourcekey=0-BBpztxX558AEy2-WtKmphg&usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Surefire Strategies for Struggling Readers and Writers',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfUW5YU0FFT0FyUEk?resourcekey=0-x_ebmhgPYuZHCZS9r5N-Iw&usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Growing Growth Mindsets in the Co-Taught Classroom',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfYlpJUjhPbUFYa2s?resourcekey=0-rnUpKwJx4pGaWCY6Hxsr1A&usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Accelerating the Learning of Students with Disabilities. INCREASING MOTIVATION, MINDSET & GRIT (K-12)',
-    links: [
-      { text: 'View All Resources', url: '//drive.google.com/drive/folders/0B6LJvCVcyOwfZC1IRW41bDExOFE?usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Helping Students With Special Needs K-5',
-    links: [
-      { text: 'Resources', url: '//drive.google.com/folderview?id=0B6LJvCVcyOwfMWlacGstYWJEMzg&usp=sharing' },
-      { text: 'Downloads', url: '//drive.google.com/folderview?id=0B6LJvCVcyOwfakJGU3FBekhTa0U&usp=sharing' }
-    ],
-    showDivider: true
-  },
-  {
-    title: 'Utilizing Technology',
-    links: [
-      { text: 'View Flyer', url: '//www.smore.com/kskc3' }
-    ],
-    showDivider: false,
-    hasImage: true,
-    imageUrl: '/img/smore1.jpg',
-    imageLink: '//www.smore.com/kskc3'
-  },
-  {
-    title: 'Tech for Tots',
-    links: [
-      { text: 'View Flyer', url: '//www.smore.com/gf4hm' }
-    ],
-    showDivider: false,
-    hasImage: true,
-    imageUrl: '/img/smore2.jpg',
-    imageLink: '//www.smore.com/gf4hm'
-  }
-])
+// Get resources from the JSON file
+const resources = ref<Resource[]>(trainingResourcesContent.resources || [])
 
 useHead({
   title: pageData.value?.title || 'Training Resources'
 })
 </script>
+
+<style scoped>
+.resource-image {
+  max-width: 300px;
+  max-height: 400px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.resource-image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+</style>
 

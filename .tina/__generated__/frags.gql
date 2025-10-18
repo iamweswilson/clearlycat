@@ -10,3 +10,27 @@ fragment PageParts on Page {
   paragraph1
   paragraph2
 }
+
+fragment Training_resourcesParts on Training_resources {
+  __typename
+  title
+  heading
+  subheading
+  backgroundImage
+  resources {
+    __typename
+    title
+    links {
+      __typename
+      text
+      url
+    }
+    images {
+      __typename
+      src
+      alt
+      link
+    }
+    showDivider
+  }
+}
