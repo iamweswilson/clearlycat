@@ -71,30 +71,6 @@ var config_default = defineConfig({
             }
           },
           {
-            type: "string",
-            name: "body",
-            label: "Body",
-            ui: {
-              component: "textarea"
-            }
-          },
-          {
-            type: "string",
-            name: "paragraph1",
-            label: "Paragraph 1",
-            ui: {
-              component: "textarea"
-            }
-          },
-          {
-            type: "string",
-            name: "paragraph2",
-            label: "Paragraph 2",
-            ui: {
-              component: "textarea"
-            }
-          },
-          {
             type: "object",
             name: "resources",
             label: "Training Resources (for Training Resources page only)",

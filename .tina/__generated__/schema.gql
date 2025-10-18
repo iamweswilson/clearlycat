@@ -112,9 +112,6 @@ type Page implements Node & Document {
   backgroundImage: String
   contentTitle: String
   content: String
-  body: String
-  paragraph1: String
-  paragraph2: String
   resources: [PageResources]
   id: ID!
   _sys: SystemInfo!
@@ -165,9 +162,6 @@ input PageFilter {
   backgroundImage: ImageFilter
   contentTitle: StringFilter
   content: StringFilter
-  body: StringFilter
-  paragraph1: StringFilter
-  paragraph2: StringFilter
   resources: PageResourcesFilter
 }
 
@@ -226,9 +220,6 @@ input PageMutation {
   backgroundImage: String
   contentTitle: String
   content: String
-  body: String
-  paragraph1: String
-  paragraph2: String
   resources: [PageResourcesMutation]
 }
 

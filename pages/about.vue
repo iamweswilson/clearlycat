@@ -24,12 +24,9 @@
             <h2 class="text-3xl font-bold mb-4" :data-tina-field="tinaField(pageData, 'contentTitle')">
               {{ pageData?.contentTitle }}
             </h2>
-            <p class="mb-4" :data-tina-field="tinaField(pageData, 'paragraph1')">
-              {{ pageData?.paragraph1 }}
-            </p>
-            <p :data-tina-field="tinaField(pageData, 'paragraph2')">
-              {{ pageData?.paragraph2 }}
-            </p>
+            <div class="whitespace-pre-line" :data-tina-field="tinaField(pageData, 'content')">
+              {{ pageData?.content }}
+            </div>
           </div>
         </div>
       </div>

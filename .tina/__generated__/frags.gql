@@ -6,9 +6,6 @@ fragment PageParts on Page {
   backgroundImage
   contentTitle
   content
-  body
-  paragraph1
-  paragraph2
   resources {
     __typename
     title
