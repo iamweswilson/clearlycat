@@ -8,6 +8,18 @@ export default defineNuxtConfig({
     '@nuxt/content'
   ],
 
+  content: {
+    // Default content configuration
+  },
+
+  runtimeConfig: {
+    public: {
+      tinaClientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || '',
+      tinaToken: process.env.TINA_TOKEN || '',
+      githubBranch: process.env.GITHUB_BRANCH || 'main'
+    }
+  },
+
   app: {
     head: {
       title: 'Thinking In Common',

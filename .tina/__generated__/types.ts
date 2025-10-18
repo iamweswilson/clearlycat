@@ -172,6 +172,7 @@ export type Page = Node & Document & {
   subheading?: Maybe<Scalars['String']['output']>;
   backgroundImage?: Maybe<Scalars['String']['output']>;
   contentTitle?: Maybe<Scalars['String']['output']>;
+  content?: Maybe<Scalars['String']['output']>;
   body?: Maybe<Scalars['String']['output']>;
   paragraph1?: Maybe<Scalars['String']['output']>;
   paragraph2?: Maybe<Scalars['String']['output']>;
@@ -200,6 +201,7 @@ export type PageFilter = {
   subheading?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
   contentTitle?: InputMaybe<StringFilter>;
+  content?: InputMaybe<StringFilter>;
   body?: InputMaybe<StringFilter>;
   paragraph1?: InputMaybe<StringFilter>;
   paragraph2?: InputMaybe<StringFilter>;
@@ -289,19 +291,20 @@ export type PageMutation = {
   subheading?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
   contentTitle?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['String']['input']>;
   body?: InputMaybe<Scalars['String']['input']>;
   paragraph1?: InputMaybe<Scalars['String']['input']>;
   paragraph2?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null };
+export type PagePartsFragment = { __typename: 'Page', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -313,7 +316,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -323,6 +326,7 @@ export const PagePartsFragmentDoc = gql`
   subheading
   backgroundImage
   contentTitle
+  content
   body
   paragraph1
   paragraph2

@@ -93,6 +93,7 @@ type Page implements Node & Document {
   subheading: String
   backgroundImage: String
   contentTitle: String
+  content: String
   body: String
   paragraph1: String
   paragraph2: String
@@ -121,6 +122,7 @@ input PageFilter {
   subheading: StringFilter
   backgroundImage: ImageFilter
   contentTitle: StringFilter
+  content: StringFilter
   body: StringFilter
   paragraph1: StringFilter
   paragraph2: StringFilter
@@ -162,6 +164,7 @@ input PageMutation {
   subheading: String
   backgroundImage: String
   contentTitle: String
+  content: String
   body: String
   paragraph1: String
   paragraph2: String

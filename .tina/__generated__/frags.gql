@@ -5,6 +5,7 @@ fragment PageParts on Page {
   subheading
   backgroundImage
   contentTitle
+  content
   body
   paragraph1
   paragraph2

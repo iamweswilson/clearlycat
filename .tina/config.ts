@@ -1,29 +1,30 @@
 import { defineConfig } from 'tinacms'
 
-// Your GitHub information
-const branch =
-  process.env.GITHUB_BRANCH ||
-  process.env.VERCEL_GIT_COMMIT_REF ||
-  process.env.HEAD ||
-  'add-decap-cms'
+// Your hosting provider likely exposes this as an environment variable
+const branch = process.env.GITHUB_BRANCH || 'main'
 
 export default defineConfig({
   branch,
-
-  // Get this from your GitHub OAuth App
+  
+  // Get this from tina.io - leave empty for local-only mode
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || null,
+  
+  // Get this from tina.io - leave empty for local-only mode
   token: process.env.TINA_TOKEN || null,
 
   build: {
     outputFolder: 'admin',
     publicFolder: 'public',
   },
+  
   media: {
     tina: {
       mediaRoot: 'img',
       publicFolder: 'public',
     },
   },
+  
+  // See docs on content modeling for more info on how to setup new content models: https://tina.io/docs/schema/
   schema: {
     collections: [
       {
@@ -31,32 +32,17 @@ export default defineConfig({
         label: 'Pages',
         path: 'content/pages',
         format: 'json',
-        ui: {
-          router: ({ document }) => {
-            if (document._sys.filename === 'index') {
-              return '/'
-            }
-            if (document._sys.filename === 'about') {
-              return '/about'
-            }
-            if (document._sys.filename === 'contact') {
-              return '/contact'
-            }
-            return `/${document._sys.filename}`
-          },
-        },
         fields: [
           {
             type: 'string',
             name: 'title',
             label: 'Page Title',
-            isTitle: true,
             required: true,
           },
           {
             type: 'string',
             name: 'heading',
-            label: 'Page Heading (shown in header)',
+            label: 'Heading',
             required: true,
           },
           {
@@ -70,17 +56,25 @@ export default defineConfig({
           {
             type: 'image',
             name: 'backgroundImage',
-            label: 'Header Background Image',
+            label: 'Background Image',
           },
           {
             type: 'string',
             name: 'contentTitle',
-            label: 'Content Title (optional)',
+            label: 'Content Title',
+          },
+          {
+            type: 'string',
+            name: 'content',
+            label: 'Content',
+            ui: {
+              component: 'textarea',
+            },
           },
           {
             type: 'string',
             name: 'body',
-            label: 'Main Content',
+            label: 'Body',
             ui: {
               component: 'textarea',
             },
@@ -88,7 +82,7 @@ export default defineConfig({
           {
             type: 'string',
             name: 'paragraph1',
-            label: 'Paragraph 1 (About page)',
+            label: 'Paragraph 1',
             ui: {
               component: 'textarea',
             },
@@ -96,7 +90,7 @@ export default defineConfig({
           {
             type: 'string',
             name: 'paragraph2',
-            label: 'Paragraph 2 (About page)',
+            label: 'Paragraph 2',
             ui: {
               component: 'textarea',
             },
@@ -106,4 +100,3 @@ export default defineConfig({
     ],
   },
 })
-

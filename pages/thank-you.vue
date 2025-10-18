@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('/img/contact-bg.jpg')">
+    <header class="intro-header" :style="`background-image: url('${pageData?.backgroundImage || '/img/contact-bg.jpg'}')`">
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           <div class="page-heading text-center">
-            <h1>Contact Me</h1>
+            <h1>{{ pageData?.heading }}</h1>
             <hr class="small">
-            <span class="subheading">Questions? Ideas? Contact me!</span>
+            <span class="subheading">{{ pageData?.subheading }}</span>
           </div>
         </div>
       </div>
@@ -24,8 +24,13 @@
 </template>
 
 <script setup lang="ts">
+// Import content directly from JSON file
+import thankYouContent from '~/content/pages/thank-you.json'
+
+const pageData = ref(thankYouContent)
+
 useHead({
-  title: 'Thank You'
+  title: pageData.value?.title || 'Thank You'
 })
 </script>
 

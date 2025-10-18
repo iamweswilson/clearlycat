@@ -49,21 +49,38 @@
 
   .navbar {
     @apply fixed top-0 left-0 right-0;
-    @apply bg-white;
-    @apply shadow-md;
+    @apply bg-transparent;
     @apply z-50;
     @apply transition-all duration-300;
+    background: transparent !important;
+  }
+
+  .navbar .container {
+    @apply bg-transparent;
+    background: transparent !important;
+  }
+
+  .navbar .container > div {
+    @apply bg-transparent;
+    background: transparent !important;
+  }
+
+  .navbar-brand {
+    @apply block;
+    @apply flex-shrink-0;
   }
 
   .navbar-brand img {
     @apply h-12;
     @apply w-auto;
+    @apply block;
+    @apply max-w-full;
   }
 
   .nav-link {
     @apply px-4 py-2;
-    @apply text-gray-700;
-    @apply hover:text-primary;
+    @apply text-white;
+    @apply hover:text-gray-200;
     @apply transition-colors;
     @apply font-open-sans;
     @apply text-sm;

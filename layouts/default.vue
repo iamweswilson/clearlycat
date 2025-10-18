@@ -6,13 +6,13 @@
         <div class="flex justify-between items-center py-4">
           <!-- Logo -->
           <NuxtLink to="/" class="navbar-brand">
-            <img src="/img/logo.svg" alt="Thinking In Common" @error="handleImageError">
+            <img :src="logoUrl" alt="Thinking In Common" @error="handleImageError">
           </NuxtLink>
 
           <!-- Mobile menu button -->
           <button 
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden text-gray-700 hover:text-primary focus:outline-none"
+            class="md:hidden text-white hover:text-gray-200 focus:outline-none"
             aria-label="Toggle navigation"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -44,8 +44,8 @@
       </div>
     </nav>
 
-    <!-- Add padding to account for fixed navbar -->
-    <div class="pt-20">
+    <!-- Main content area -->
+    <div>
       <!-- Page Content -->
       <slot />
     </div>
@@ -64,13 +64,18 @@
 
 <script setup lang="ts">
 import { ref, computed } from 'vue'
+import logoSvg from '~/assets/logo.svg'
+import logoPng from '~/assets/logo.png'
 
 const mobileMenuOpen = ref(false)
 const currentYear = computed(() => new Date().getFullYear())
 
+// Logo URL - using assets directory
+const logoUrl = ref(logoSvg)
+
 const handleImageError = (e: Event) => {
   const target = e.target as HTMLImageElement
-  target.src = '/img/logo.png'
+  target.src = logoPng
 }
 </script>
 

@@ -1,13 +1,13 @@
 <template>
   <div>
     <!-- Page Header -->
-    <header class="intro-header" style="background-image: url('/img/bkgd-1.jpg')">
+    <header class="intro-header" :style="`background-image: url('${pageData?.backgroundImage || '/img/bkgd-1.jpg'}')`">
       <div class="container mx-auto px-4">
         <div class="max-w-5xl mx-auto">
           <div class="page-heading text-center">
-            <h1>{{ pageData.heading }}</h1>
+            <h1>{{ pageData?.heading }}</h1>
             <hr class="small">
-            <span class="subheading">{{ pageData.subheading }}</span>
+            <span class="subheading">{{ pageData?.subheading }}</span>
           </div>
         </div>
       </div>
@@ -78,15 +78,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+// Import content directly from JSON file
+import seminarsContent from '~/content/pages/seminars.json'
 
-const pageData = ref({
-  heading: 'Seminars',
-  subheading: 'Recent and upcoming presentations and events.'
-})
+const pageData = ref(seminarsContent)
 
 useHead({
-  title: 'Seminars'
+  title: pageData.value?.title || 'Seminars'
 })
 </script>
 
