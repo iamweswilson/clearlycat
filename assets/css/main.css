@@ -48,7 +48,7 @@
   }
 
   .navbar {
-    @apply fixed top-0 left-0 right-0;
+    @apply absolute top-0 left-0 right-0;
     @apply bg-transparent;
     @apply z-50;
     @apply transition-all duration-300;
