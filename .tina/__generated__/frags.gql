@@ -1,25 +1,35 @@
 fragment PageParts on Page {
   __typename
-  title
-  heading
-  subheading
-  backgroundImage
-  contentTitle
-  content
-  resources {
-    __typename
+  ... on PageTrainingResources {
     title
-    links {
+    heading
+    subheading
+    backgroundImage
+    contentTitle
+    content
+    resources {
       __typename
-      text
-      url
+      title
+      links {
+        __typename
+        text
+        url
+      }
+      images {
+        __typename
+        src
+        alt
+        link
+      }
+      showDivider
     }
-    images {
-      __typename
-      src
-      alt
-      link
-    }
-    showDivider
+  }
+  ... on PageStandardPage {
+    title
+    heading
+    subheading
+    backgroundImage
+    contentTitle
+    content
   }
 }

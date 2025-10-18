@@ -163,42 +163,57 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | Folder;
+export type DocumentNode = PageTrainingResources | PageStandardPage | Folder;
 
-export type PageResourcesLinks = {
-  __typename?: 'PageResourcesLinks';
+export type PageTrainingResourcesResourcesLinks = {
+  __typename?: 'PageTrainingResourcesResourcesLinks';
   text: Scalars['String']['output'];
   url: Scalars['String']['output'];
 };
 
-export type PageResourcesImages = {
-  __typename?: 'PageResourcesImages';
+export type PageTrainingResourcesResourcesImages = {
+  __typename?: 'PageTrainingResourcesResourcesImages';
   src: Scalars['String']['output'];
   alt?: Maybe<Scalars['String']['output']>;
   link?: Maybe<Scalars['String']['output']>;
 };
 
-export type PageResources = {
-  __typename?: 'PageResources';
+export type PageTrainingResourcesResources = {
+  __typename?: 'PageTrainingResourcesResources';
   title: Scalars['String']['output'];
-  links?: Maybe<Array<Maybe<PageResourcesLinks>>>;
-  images?: Maybe<Array<Maybe<PageResourcesImages>>>;
+  links?: Maybe<Array<Maybe<PageTrainingResourcesResourcesLinks>>>;
+  images?: Maybe<Array<Maybe<PageTrainingResourcesResourcesImages>>>;
   showDivider?: Maybe<Scalars['Boolean']['output']>;
 };
 
-export type Page = Node & Document & {
-  __typename?: 'Page';
+export type PageTrainingResources = Node & Document & {
+  __typename?: 'PageTrainingResources';
   title: Scalars['String']['output'];
   heading: Scalars['String']['output'];
   subheading?: Maybe<Scalars['String']['output']>;
   backgroundImage?: Maybe<Scalars['String']['output']>;
   contentTitle?: Maybe<Scalars['String']['output']>;
   content?: Maybe<Scalars['String']['output']>;
-  resources?: Maybe<Array<Maybe<PageResources>>>;
+  resources?: Maybe<Array<Maybe<PageTrainingResourcesResources>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
 };
+
+export type PageStandardPage = Node & Document & {
+  __typename?: 'PageStandardPage';
+  title: Scalars['String']['output'];
+  heading: Scalars['String']['output'];
+  subheading?: Maybe<Scalars['String']['output']>;
+  backgroundImage?: Maybe<Scalars['String']['output']>;
+  contentTitle?: Maybe<Scalars['String']['output']>;
+  content?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+};
+
+export type Page = PageTrainingResources | PageStandardPage;
 
 export type StringFilter = {
   startsWith?: InputMaybe<Scalars['String']['input']>;
@@ -214,12 +229,12 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type PageResourcesLinksFilter = {
+export type PageTrainingResourcesResourcesLinksFilter = {
   text?: InputMaybe<StringFilter>;
   url?: InputMaybe<StringFilter>;
 };
 
-export type PageResourcesImagesFilter = {
+export type PageTrainingResourcesResourcesImagesFilter = {
   src?: InputMaybe<ImageFilter>;
   alt?: InputMaybe<StringFilter>;
   link?: InputMaybe<StringFilter>;
@@ -230,21 +245,35 @@ export type BooleanFilter = {
   exists?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type PageResourcesFilter = {
+export type PageTrainingResourcesResourcesFilter = {
   title?: InputMaybe<StringFilter>;
-  links?: InputMaybe<PageResourcesLinksFilter>;
-  images?: InputMaybe<PageResourcesImagesFilter>;
+  links?: InputMaybe<PageTrainingResourcesResourcesLinksFilter>;
+  images?: InputMaybe<PageTrainingResourcesResourcesImagesFilter>;
   showDivider?: InputMaybe<BooleanFilter>;
 };
 
-export type PageFilter = {
+export type PageTrainingResourcesFilter = {
   title?: InputMaybe<StringFilter>;
   heading?: InputMaybe<StringFilter>;
   subheading?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
   contentTitle?: InputMaybe<StringFilter>;
   content?: InputMaybe<StringFilter>;
-  resources?: InputMaybe<PageResourcesFilter>;
+  resources?: InputMaybe<PageTrainingResourcesResourcesFilter>;
+};
+
+export type PageStandardPageFilter = {
+  title?: InputMaybe<StringFilter>;
+  heading?: InputMaybe<StringFilter>;
+  subheading?: InputMaybe<StringFilter>;
+  backgroundImage?: InputMaybe<ImageFilter>;
+  contentTitle?: InputMaybe<StringFilter>;
+  content?: InputMaybe<StringFilter>;
+};
+
+export type PageFilter = {
+  trainingResources?: InputMaybe<PageTrainingResourcesFilter>;
+  standardPage?: InputMaybe<PageStandardPageFilter>;
 };
 
 export type PageConnectionEdges = {
@@ -325,42 +354,60 @@ export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
 };
 
-export type PageResourcesLinksMutation = {
+export type PageTrainingResourcesResourcesLinksMutation = {
   text?: InputMaybe<Scalars['String']['input']>;
   url?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PageResourcesImagesMutation = {
+export type PageTrainingResourcesResourcesImagesMutation = {
   src?: InputMaybe<Scalars['String']['input']>;
   alt?: InputMaybe<Scalars['String']['input']>;
   link?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type PageResourcesMutation = {
+export type PageTrainingResourcesResourcesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
-  links?: InputMaybe<Array<InputMaybe<PageResourcesLinksMutation>>>;
-  images?: InputMaybe<Array<InputMaybe<PageResourcesImagesMutation>>>;
+  links?: InputMaybe<Array<InputMaybe<PageTrainingResourcesResourcesLinksMutation>>>;
+  images?: InputMaybe<Array<InputMaybe<PageTrainingResourcesResourcesImagesMutation>>>;
   showDivider?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type PageMutation = {
+export type PageTrainingResourcesMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   heading?: InputMaybe<Scalars['String']['input']>;
   subheading?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
   contentTitle?: InputMaybe<Scalars['String']['input']>;
   content?: InputMaybe<Scalars['String']['input']>;
-  resources?: InputMaybe<Array<InputMaybe<PageResourcesMutation>>>;
+  resources?: InputMaybe<Array<InputMaybe<PageTrainingResourcesResourcesMutation>>>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, resources?: Array<{ __typename: 'PageResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null };
+export type PageStandardPageMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  heading?: InputMaybe<Scalars['String']['input']>;
+  subheading?: InputMaybe<Scalars['String']['input']>;
+  backgroundImage?: InputMaybe<Scalars['String']['input']>;
+  contentTitle?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageMutation = {
+  trainingResources?: InputMaybe<PageTrainingResourcesMutation>;
+  standardPage?: InputMaybe<PageStandardPageMutation>;
+};
+
+type PageParts_PageTrainingResources_Fragment = { __typename: 'PageTrainingResources', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null };
+
+type PageParts_PageStandardPage_Fragment = { __typename: 'PageStandardPage', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null };
+
+export type PagePartsFragment = PageParts_PageTrainingResources_Fragment | PageParts_PageStandardPage_Fragment;
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'PageTrainingResources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageStandardPage', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -372,32 +419,42 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'PageTrainingResources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageStandardPage', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
   __typename
-  title
-  heading
-  subheading
-  backgroundImage
-  contentTitle
-  content
-  resources {
-    __typename
+  ... on PageTrainingResources {
     title
-    links {
+    heading
+    subheading
+    backgroundImage
+    contentTitle
+    content
+    resources {
       __typename
-      text
-      url
+      title
+      links {
+        __typename
+        text
+        url
+      }
+      images {
+        __typename
+        src
+        alt
+        link
+      }
+      showDivider
     }
-    images {
-      __typename
-      src
-      alt
-      link
-    }
-    showDivider
+  }
+  ... on PageStandardPage {
+    title
+    heading
+    subheading
+    backgroundImage
+    contentTitle
+    content
   }
 }
     `;

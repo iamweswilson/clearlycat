@@ -85,38 +85,52 @@ type Collection {
   documents(before: String, after: String, first: Float, last: Float, sort: String, filter: DocumentFilter, folder: String): DocumentConnection!
 }
 
-union DocumentNode = Page | Folder
+union DocumentNode = PageTrainingResources | PageStandardPage | Folder
 
-type PageResourcesLinks {
+type PageTrainingResourcesResourcesLinks {
   text: String!
   url: String!
 }
 
-type PageResourcesImages {
+type PageTrainingResourcesResourcesImages {
   src: String!
   alt: String
   link: String
 }
 
-type PageResources {
+type PageTrainingResourcesResources {
   title: String!
-  links: [PageResourcesLinks]
-  images: [PageResourcesImages]
+  links: [PageTrainingResourcesResourcesLinks]
+  images: [PageTrainingResourcesResourcesImages]
   showDivider: Boolean
 }
 
-type Page implements Node & Document {
+type PageTrainingResources implements Node & Document {
   title: String!
   heading: String!
   subheading: String
   backgroundImage: String
   contentTitle: String
   content: String
-  resources: [PageResources]
+  resources: [PageTrainingResourcesResources]
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
 }
+
+type PageStandardPage implements Node & Document {
+  title: String!
+  heading: String!
+  subheading: String
+  backgroundImage: String
+  contentTitle: String
+  content: String
+  id: ID!
+  _sys: SystemInfo!
+  _values: JSON!
+}
+
+union Page = PageTrainingResources | PageStandardPage
 
 input StringFilter {
   startsWith: String
@@ -132,12 +146,12 @@ input ImageFilter {
   in: [String]
 }
 
-input PageResourcesLinksFilter {
+input PageTrainingResourcesResourcesLinksFilter {
   text: StringFilter
   url: StringFilter
 }
 
-input PageResourcesImagesFilter {
+input PageTrainingResourcesResourcesImagesFilter {
   src: ImageFilter
   alt: StringFilter
   link: StringFilter
@@ -148,21 +162,35 @@ input BooleanFilter {
   exists: Boolean
 }
 
-input PageResourcesFilter {
+input PageTrainingResourcesResourcesFilter {
   title: StringFilter
-  links: PageResourcesLinksFilter
-  images: PageResourcesImagesFilter
+  links: PageTrainingResourcesResourcesLinksFilter
+  images: PageTrainingResourcesResourcesImagesFilter
   showDivider: BooleanFilter
 }
 
-input PageFilter {
+input PageTrainingResourcesFilter {
   title: StringFilter
   heading: StringFilter
   subheading: StringFilter
   backgroundImage: ImageFilter
   contentTitle: StringFilter
   content: StringFilter
-  resources: PageResourcesFilter
+  resources: PageTrainingResourcesResourcesFilter
+}
+
+input PageStandardPageFilter {
+  title: StringFilter
+  heading: StringFilter
+  subheading: StringFilter
+  backgroundImage: ImageFilter
+  contentTitle: StringFilter
+  content: StringFilter
+}
+
+input PageFilter {
+  trainingResources: PageTrainingResourcesFilter
+  standardPage: PageStandardPageFilter
 }
 
 type PageConnectionEdges {
@@ -195,32 +223,46 @@ input DocumentMutation {
   page: PageMutation
 }
 
-input PageResourcesLinksMutation {
+input PageTrainingResourcesResourcesLinksMutation {
   text: String
   url: String
 }
 
-input PageResourcesImagesMutation {
+input PageTrainingResourcesResourcesImagesMutation {
   src: String
   alt: String
   link: String
 }
 
-input PageResourcesMutation {
+input PageTrainingResourcesResourcesMutation {
   title: String
-  links: [PageResourcesLinksMutation]
-  images: [PageResourcesImagesMutation]
+  links: [PageTrainingResourcesResourcesLinksMutation]
+  images: [PageTrainingResourcesResourcesImagesMutation]
   showDivider: Boolean
 }
 
-input PageMutation {
+input PageTrainingResourcesMutation {
   title: String
   heading: String
   subheading: String
   backgroundImage: String
   contentTitle: String
   content: String
-  resources: [PageResourcesMutation]
+  resources: [PageTrainingResourcesResourcesMutation]
+}
+
+input PageStandardPageMutation {
+  title: String
+  heading: String
+  subheading: String
+  backgroundImage: String
+  contentTitle: String
+  content: String
+}
+
+input PageMutation {
+  trainingResources: PageTrainingResourcesMutation
+  standardPage: PageStandardPageMutation
 }
 
 schema {
