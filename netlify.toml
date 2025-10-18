@@ -1,0 +1,13 @@
+[build]
+  command = "npm run generate"
+  publish = ".output/public"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Form submissions
+[[plugins]]
+  package = "@netlify/plugin-forms"
+

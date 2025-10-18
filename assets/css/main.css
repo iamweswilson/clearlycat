@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-open-sans;
+    @apply text-gray-800;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-lora;
+    @apply font-bold;
+  }
+}
+
+@layer components {
+  .intro-header {
+    @apply relative;
+    @apply bg-cover bg-center bg-no-repeat;
+    @apply text-white;
+    @apply py-20 md:py-32;
+    background-color: #777;
+  }
+
+  .site-heading h1,
+  .page-heading h1 {
+    @apply text-4xl md:text-5xl lg:text-6xl;
+    @apply font-bold;
+    @apply mb-4;
+  }
+
+  .site-heading hr,
+  .page-heading hr {
+    @apply max-w-[100px];
+    @apply mx-auto;
+    @apply border-white;
+    @apply border-t-2;
+    @apply my-6;
+  }
+
+  .site-heading .subheading,
+  .page-heading .subheading {
+    @apply block;
+    @apply text-lg md:text-xl;
+    @apply font-light;
+    @apply mt-3;
+  }
+
+  .navbar {
+    @apply fixed top-0 left-0 right-0;
+    @apply bg-white;
+    @apply shadow-md;
+    @apply z-50;
+    @apply transition-all duration-300;
+  }
+
+  .navbar-brand img {
+    @apply h-12;
+    @apply w-auto;
+  }
+
+  .nav-link {
+    @apply px-4 py-2;
+    @apply text-gray-700;
+    @apply hover:text-primary;
+    @apply transition-colors;
+    @apply font-open-sans;
+    @apply text-sm;
+    @apply uppercase;
+    @apply tracking-wide;
+  }
+
+  .post-preview h2 {
+    @apply text-2xl md:text-3xl;
+    @apply font-bold;
+    @apply mb-3;
+  }
+
+  .post-preview p {
+    @apply text-lg;
+    @apply leading-relaxed;
+  }
+
+  .pager {
+    @apply list-none;
+    @apply flex;
+    @apply justify-end;
+    @apply mt-8;
+  }
+
+  .pager li a {
+    @apply inline-block;
+    @apply px-6 py-3;
+    @apply bg-primary;
+    @apply text-white;
+    @apply rounded;
+    @apply hover:bg-opacity-90;
+    @apply transition-all;
+    @apply no-underline;
+  }
+
+  .resource-btn {
+    @apply inline-block;
+    @apply px-6 py-3;
+    @apply bg-primary;
+    @apply text-white;
+    @apply rounded;
+    @apply hover:bg-opacity-90;
+    @apply transition-all;
+    @apply no-underline;
+    @apply mb-2;
+  }
+
+  .resource-graphic {
+    @apply w-full;
+    @apply h-auto;
+    @apply rounded;
+    @apply shadow-md;
+    @apply mb-4;
+  }
+
+  .btn-default {
+    @apply px-6 py-3;
+    @apply bg-primary;
+    @apply text-white;
+    @apply rounded;
+    @apply hover:bg-opacity-90;
+    @apply transition-all;
+    @apply border-none;
+    @apply cursor-pointer;
+  }
+
+  .form-control {
+    @apply w-full;
+    @apply px-4 py-3;
+    @apply border border-gray-300;
+    @apply rounded;
+    @apply focus:outline-none focus:ring-2 focus:ring-primary;
+    @apply transition-all;
+  }
+
+  textarea.form-control {
+    @apply min-h-[150px];
+    @apply resize-y;
+  }
+
+  footer {
+    @apply py-8;
+    @apply bg-white;
+    @apply border-t border-gray-200;
+  }
+
+  footer .copyright {
+    @apply text-center;
+    @apply text-gray-600;
+    @apply text-sm;
+  }
+}
+
