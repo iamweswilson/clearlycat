@@ -1,22 +1,23 @@
 import { defineNuxtPlugin } from '#app'
-import { TinaCloud } from 'tinacms'
+// TinaCloud import disabled - not needed for static content loading
+// import { TinaCloud } from 'tinacms'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  const config = useRuntimeConfig()
+  // TinaCMS plugin disabled to prevent import errors
+  // Content is loaded directly from JSON files
+  // TinaCMS admin panel still works through /admin route
   
-  // Initialize TinaCMS Cloud client for visual editing
-  const tina = new TinaCloud({
-    clientId: config.public.tinaClientId as string || null,
-    branch: config.public.githubBranch as string || 'main',
-    token: config.public.tinaToken as string || null,
-  })
-
-  // Provide TinaCMS to the app
-  nuxtApp.provide('tina', tina)
+  // const config = useRuntimeConfig()
+  // const tina = new TinaCloud({
+  //   clientId: config.public.tinaClientId as string || null,
+  //   branch: config.public.githubBranch as string || 'main',
+  //   token: config.public.tinaToken as string || null,
+  // })
+  // nuxtApp.provide('tina', tina)
 
   return {
     provide: {
-      tina
+      tina: null
     }
   }
 })

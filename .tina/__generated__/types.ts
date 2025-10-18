@@ -84,8 +84,6 @@ export type Query = {
   document: DocumentNode;
   page: Page;
   pageConnection: PageConnection;
-  training_resources: Training_Resources;
-  training_resourcesConnection: Training_ResourcesConnection;
 };
 
 
@@ -124,24 +122,8 @@ export type QueryPageConnectionArgs = {
   filter?: InputMaybe<PageFilter>;
 };
 
-
-export type QueryTraining_ResourcesArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryTraining_ResourcesConnectionArgs = {
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<Training_ResourcesFilter>;
-};
-
 export type DocumentFilter = {
   page?: InputMaybe<PageFilter>;
-  training_resources?: InputMaybe<Training_ResourcesFilter>;
 };
 
 export type DocumentConnectionEdges = {
@@ -181,7 +163,28 @@ export type CollectionDocumentsArgs = {
   folder?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type DocumentNode = Page | Training_Resources | Folder;
+export type DocumentNode = Page | Folder;
+
+export type PageResourcesLinks = {
+  __typename?: 'PageResourcesLinks';
+  text: Scalars['String']['output'];
+  url: Scalars['String']['output'];
+};
+
+export type PageResourcesImages = {
+  __typename?: 'PageResourcesImages';
+  src: Scalars['String']['output'];
+  alt?: Maybe<Scalars['String']['output']>;
+  link?: Maybe<Scalars['String']['output']>;
+};
+
+export type PageResources = {
+  __typename?: 'PageResources';
+  title: Scalars['String']['output'];
+  links?: Maybe<Array<Maybe<PageResourcesLinks>>>;
+  images?: Maybe<Array<Maybe<PageResourcesImages>>>;
+  showDivider?: Maybe<Scalars['Boolean']['output']>;
+};
 
 export type Page = Node & Document & {
   __typename?: 'Page';
@@ -190,10 +193,11 @@ export type Page = Node & Document & {
   subheading?: Maybe<Scalars['String']['output']>;
   backgroundImage?: Maybe<Scalars['String']['output']>;
   contentTitle?: Maybe<Scalars['String']['output']>;
-  content?: Maybe<Scalars['JSON']['output']>;
-  body?: Maybe<Scalars['JSON']['output']>;
-  paragraph1?: Maybe<Scalars['JSON']['output']>;
-  paragraph2?: Maybe<Scalars['JSON']['output']>;
+  content?: Maybe<Scalars['String']['output']>;
+  body?: Maybe<Scalars['String']['output']>;
+  paragraph1?: Maybe<Scalars['String']['output']>;
+  paragraph2?: Maybe<Scalars['String']['output']>;
+  resources?: Maybe<Array<Maybe<PageResources>>>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -213,10 +217,27 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type RichTextFilter = {
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-  eq?: InputMaybe<Scalars['String']['input']>;
+export type PageResourcesLinksFilter = {
+  text?: InputMaybe<StringFilter>;
+  url?: InputMaybe<StringFilter>;
+};
+
+export type PageResourcesImagesFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+  link?: InputMaybe<StringFilter>;
+};
+
+export type BooleanFilter = {
+  eq?: InputMaybe<Scalars['Boolean']['input']>;
   exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PageResourcesFilter = {
+  title?: InputMaybe<StringFilter>;
+  links?: InputMaybe<PageResourcesLinksFilter>;
+  images?: InputMaybe<PageResourcesImagesFilter>;
+  showDivider?: InputMaybe<BooleanFilter>;
 };
 
 export type PageFilter = {
@@ -225,10 +246,11 @@ export type PageFilter = {
   subheading?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
   contentTitle?: InputMaybe<StringFilter>;
-  content?: InputMaybe<RichTextFilter>;
-  body?: InputMaybe<RichTextFilter>;
-  paragraph1?: InputMaybe<RichTextFilter>;
-  paragraph2?: InputMaybe<RichTextFilter>;
+  content?: InputMaybe<StringFilter>;
+  body?: InputMaybe<StringFilter>;
+  paragraph1?: InputMaybe<StringFilter>;
+  paragraph2?: InputMaybe<StringFilter>;
+  resources?: InputMaybe<PageResourcesFilter>;
 };
 
 export type PageConnectionEdges = {
@@ -244,83 +266,6 @@ export type PageConnection = Connection & {
   edges?: Maybe<Array<Maybe<PageConnectionEdges>>>;
 };
 
-export type Training_ResourcesResourcesLinks = {
-  __typename?: 'Training_resourcesResourcesLinks';
-  text: Scalars['String']['output'];
-  url: Scalars['String']['output'];
-};
-
-export type Training_ResourcesResourcesImages = {
-  __typename?: 'Training_resourcesResourcesImages';
-  src: Scalars['String']['output'];
-  alt?: Maybe<Scalars['String']['output']>;
-  link?: Maybe<Scalars['String']['output']>;
-};
-
-export type Training_ResourcesResources = {
-  __typename?: 'Training_resourcesResources';
-  title: Scalars['String']['output'];
-  links?: Maybe<Array<Maybe<Training_ResourcesResourcesLinks>>>;
-  images?: Maybe<Array<Maybe<Training_ResourcesResourcesImages>>>;
-  showDivider?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type Training_Resources = Node & Document & {
-  __typename?: 'Training_resources';
-  title: Scalars['String']['output'];
-  heading: Scalars['String']['output'];
-  subheading?: Maybe<Scalars['String']['output']>;
-  backgroundImage?: Maybe<Scalars['String']['output']>;
-  resources?: Maybe<Array<Maybe<Training_ResourcesResources>>>;
-  id: Scalars['ID']['output'];
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-};
-
-export type Training_ResourcesResourcesLinksFilter = {
-  text?: InputMaybe<StringFilter>;
-  url?: InputMaybe<StringFilter>;
-};
-
-export type Training_ResourcesResourcesImagesFilter = {
-  src?: InputMaybe<ImageFilter>;
-  alt?: InputMaybe<StringFilter>;
-  link?: InputMaybe<StringFilter>;
-};
-
-export type BooleanFilter = {
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type Training_ResourcesResourcesFilter = {
-  title?: InputMaybe<StringFilter>;
-  links?: InputMaybe<Training_ResourcesResourcesLinksFilter>;
-  images?: InputMaybe<Training_ResourcesResourcesImagesFilter>;
-  showDivider?: InputMaybe<BooleanFilter>;
-};
-
-export type Training_ResourcesFilter = {
-  title?: InputMaybe<StringFilter>;
-  heading?: InputMaybe<StringFilter>;
-  subheading?: InputMaybe<StringFilter>;
-  backgroundImage?: InputMaybe<ImageFilter>;
-  resources?: InputMaybe<Training_ResourcesResourcesFilter>;
-};
-
-export type Training_ResourcesConnectionEdges = {
-  __typename?: 'Training_resourcesConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Training_Resources>;
-};
-
-export type Training_ResourcesConnection = Connection & {
-  __typename?: 'Training_resourcesConnection';
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-  edges?: Maybe<Array<Maybe<Training_ResourcesConnectionEdges>>>;
-};
-
 export type Mutation = {
   __typename?: 'Mutation';
   addPendingDocument: DocumentNode;
@@ -330,8 +275,6 @@ export type Mutation = {
   createFolder: DocumentNode;
   updatePage: Page;
   createPage: Page;
-  updateTraining_resources: Training_Resources;
-  createTraining_resources: Training_Resources;
 };
 
 
@@ -379,27 +322,31 @@ export type MutationCreatePageArgs = {
   params: PageMutation;
 };
 
-
-export type MutationUpdateTraining_ResourcesArgs = {
-  relativePath: Scalars['String']['input'];
-  params: Training_ResourcesMutation;
-};
-
-
-export type MutationCreateTraining_ResourcesArgs = {
-  relativePath: Scalars['String']['input'];
-  params: Training_ResourcesMutation;
-};
-
 export type DocumentUpdateMutation = {
   page?: InputMaybe<PageMutation>;
-  training_resources?: InputMaybe<Training_ResourcesMutation>;
   relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type DocumentMutation = {
   page?: InputMaybe<PageMutation>;
-  training_resources?: InputMaybe<Training_ResourcesMutation>;
+};
+
+export type PageResourcesLinksMutation = {
+  text?: InputMaybe<Scalars['String']['input']>;
+  url?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageResourcesImagesMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+  link?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PageResourcesMutation = {
+  title?: InputMaybe<Scalars['String']['input']>;
+  links?: InputMaybe<Array<InputMaybe<PageResourcesLinksMutation>>>;
+  images?: InputMaybe<Array<InputMaybe<PageResourcesImagesMutation>>>;
+  showDivider?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type PageMutation = {
@@ -408,48 +355,21 @@ export type PageMutation = {
   subheading?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
   contentTitle?: InputMaybe<Scalars['String']['input']>;
-  content?: InputMaybe<Scalars['JSON']['input']>;
-  body?: InputMaybe<Scalars['JSON']['input']>;
-  paragraph1?: InputMaybe<Scalars['JSON']['input']>;
-  paragraph2?: InputMaybe<Scalars['JSON']['input']>;
+  content?: InputMaybe<Scalars['String']['input']>;
+  body?: InputMaybe<Scalars['String']['input']>;
+  paragraph1?: InputMaybe<Scalars['String']['input']>;
+  paragraph2?: InputMaybe<Scalars['String']['input']>;
+  resources?: InputMaybe<Array<InputMaybe<PageResourcesMutation>>>;
 };
 
-export type Training_ResourcesResourcesLinksMutation = {
-  text?: InputMaybe<Scalars['String']['input']>;
-  url?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Training_ResourcesResourcesImagesMutation = {
-  src?: InputMaybe<Scalars['String']['input']>;
-  alt?: InputMaybe<Scalars['String']['input']>;
-  link?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Training_ResourcesResourcesMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  links?: InputMaybe<Array<InputMaybe<Training_ResourcesResourcesLinksMutation>>>;
-  images?: InputMaybe<Array<InputMaybe<Training_ResourcesResourcesImagesMutation>>>;
-  showDivider?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type Training_ResourcesMutation = {
-  title?: InputMaybe<Scalars['String']['input']>;
-  heading?: InputMaybe<Scalars['String']['input']>;
-  subheading?: InputMaybe<Scalars['String']['input']>;
-  backgroundImage?: InputMaybe<Scalars['String']['input']>;
-  resources?: InputMaybe<Array<InputMaybe<Training_ResourcesResourcesMutation>>>;
-};
-
-export type PagePartsFragment = { __typename: 'Page', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: any | null, body?: any | null, paragraph1?: any | null, paragraph2?: any | null };
-
-export type Training_ResourcesPartsFragment = { __typename: 'Training_resources', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, resources?: Array<{ __typename: 'Training_resourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'Training_resourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'Training_resourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null };
+export type PagePartsFragment = { __typename: 'Page', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, resources?: Array<{ __typename: 'PageResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null };
 
 export type PageQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: any | null, body?: any | null, paragraph1?: any | null, paragraph2?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -461,26 +381,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: any | null, body?: any | null, paragraph1?: any | null, paragraph2?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
-
-export type Training_ResourcesQueryVariables = Exact<{
-  relativePath: Scalars['String']['input'];
-}>;
-
-
-export type Training_ResourcesQuery = { __typename?: 'Query', training_resources: { __typename: 'Training_resources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'Training_resourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'Training_resourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'Training_resourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } };
-
-export type Training_ResourcesConnectionQueryVariables = Exact<{
-  before?: InputMaybe<Scalars['String']['input']>;
-  after?: InputMaybe<Scalars['String']['input']>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<Training_ResourcesFilter>;
-}>;
-
-
-export type Training_ResourcesConnectionQuery = { __typename?: 'Query', training_resourcesConnection: { __typename?: 'Training_resourcesConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'Training_resourcesConnectionEdges', cursor: string, node?: { __typename: 'Training_resources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'Training_resourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'Training_resourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'Training_resourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -494,15 +395,6 @@ export const PagePartsFragmentDoc = gql`
   body
   paragraph1
   paragraph2
-}
-    `;
-export const Training_ResourcesPartsFragmentDoc = gql`
-    fragment Training_resourcesParts on Training_resources {
-  __typename
-  title
-  heading
-  subheading
-  backgroundImage
   resources {
     __typename
     title
@@ -578,63 +470,6 @@ export const PageConnectionDocument = gql`
   }
 }
     ${PagePartsFragmentDoc}`;
-export const Training_ResourcesDocument = gql`
-    query training_resources($relativePath: String!) {
-  training_resources(relativePath: $relativePath) {
-    ... on Document {
-      _sys {
-        filename
-        basename
-        hasReferences
-        breadcrumbs
-        path
-        relativePath
-        extension
-      }
-      id
-    }
-    ...Training_resourcesParts
-  }
-}
-    ${Training_ResourcesPartsFragmentDoc}`;
-export const Training_ResourcesConnectionDocument = gql`
-    query training_resourcesConnection($before: String, $after: String, $first: Float, $last: Float, $sort: String, $filter: Training_resourcesFilter) {
-  training_resourcesConnection(
-    before: $before
-    after: $after
-    first: $first
-    last: $last
-    sort: $sort
-    filter: $filter
-  ) {
-    pageInfo {
-      hasPreviousPage
-      hasNextPage
-      startCursor
-      endCursor
-    }
-    totalCount
-    edges {
-      cursor
-      node {
-        ... on Document {
-          _sys {
-            filename
-            basename
-            hasReferences
-            breadcrumbs
-            path
-            relativePath
-            extension
-          }
-          id
-        }
-        ...Training_resourcesParts
-      }
-    }
-  }
-}
-    ${Training_ResourcesPartsFragmentDoc}`;
 export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) => Promise<R>
   export function getSdk<C>(requester: Requester<C>) {
     return {
@@ -643,12 +478,6 @@ export type Requester<C= {}> = <R, V>(doc: DocumentNode, vars?: V, options?: C) 
       },
     pageConnection(variables?: PageConnectionQueryVariables, options?: C): Promise<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}> {
         return requester<{data: PageConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: PageConnectionQueryVariables, query: string}, PageConnectionQueryVariables>(PageConnectionDocument, variables, options);
-      },
-    training_resources(variables: Training_ResourcesQueryVariables, options?: C): Promise<{data: Training_ResourcesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Training_ResourcesQueryVariables, query: string}> {
-        return requester<{data: Training_ResourcesQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Training_ResourcesQueryVariables, query: string}, Training_ResourcesQueryVariables>(Training_ResourcesDocument, variables, options);
-      },
-    training_resourcesConnection(variables?: Training_ResourcesConnectionQueryVariables, options?: C): Promise<{data: Training_ResourcesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Training_ResourcesConnectionQueryVariables, query: string}> {
-        return requester<{data: Training_ResourcesConnectionQuery, errors?: { message: string, locations: { line: number, column: number }[], path: string[] }[], variables: Training_ResourcesConnectionQueryVariables, query: string}, Training_ResourcesConnectionQueryVariables>(Training_ResourcesConnectionDocument, variables, options);
       }
     };
   }

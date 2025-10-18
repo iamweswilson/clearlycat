@@ -3,9 +3,9 @@ import { defineConfig } from "tinacms";
 var branch = process.env.GITHUB_BRANCH || process.env.VERCEL_GIT_COMMIT_REF || process.env.HEAD || "main";
 var config_default = defineConfig({
   branch,
-  // Get this from tina.io
+  // Get this from tina.io (optional for local-only development)
   clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
-  // Get this from tina.io  
+  // Get this from tina.io (optional for local-only development)
   token: process.env.TINA_TOKEN,
   build: {
     outputFolder: "admin",
@@ -31,9 +31,6 @@ var config_default = defineConfig({
         label: "Pages",
         path: "content/pages",
         format: "json",
-        match: {
-          exclude: "training-resources"
-        },
         fields: [
           {
             type: "string",
@@ -96,50 +93,11 @@ var config_default = defineConfig({
             ui: {
               component: "textarea"
             }
-          }
-        ]
-      },
-      {
-        name: "training_resources",
-        label: "Training Resources",
-        path: "content/pages",
-        format: "json",
-        match: {
-          include: "training-resources"
-        },
-        ui: {
-          filename: {
-            readonly: true,
-            slugify: () => "training-resources"
-          }
-        },
-        fields: [
-          {
-            type: "string",
-            name: "title",
-            label: "Page Title",
-            required: true
-          },
-          {
-            type: "string",
-            name: "heading",
-            label: "Heading",
-            required: true
-          },
-          {
-            type: "string",
-            name: "subheading",
-            label: "Subheading"
-          },
-          {
-            type: "image",
-            name: "backgroundImage",
-            label: "Background Image"
           },
           {
             type: "object",
             name: "resources",
-            label: "Resources",
+            label: "Training Resources (for Training Resources page only)",
             list: true,
             ui: {
               itemProps: (item) => {
