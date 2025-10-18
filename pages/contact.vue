@@ -5,9 +5,9 @@
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           <div class="page-heading text-center">
-            <h1>{{ pageData?.heading }}</h1>
+            <h1 :data-tina-field="tinaField(pageData, 'heading')">{{ pageData?.heading }}</h1>
             <hr class="small">
-            <span class="subheading">{{ pageData?.subheading }}</span>
+            <span class="subheading" :data-tina-field="tinaField(pageData, 'subheading')">{{ pageData?.subheading }}</span>
           </div>
         </div>
       </div>
@@ -67,10 +67,30 @@
 </template>
 
 <script setup lang="ts">
-// Import content directly from JSON file
+import client from '~/.tina/__generated__/client'
+
+// Check if we're in edit mode
+const isEditMode = ref(false)
+
+onMounted(() => {
+  if (process.client) {
+    isEditMode.value = window.location.pathname.includes('/admin') || 
+                       window.location.search.includes('tina=true')
+  }
+})
+
+// Import content directly from JSON file (TinaCMS fallback)
 import contactContent from '~/content/pages/contact.json'
 
 const pageData = ref(contactContent)
+
+// Helper function for TinaCMS field annotations
+const tinaField = (data: any, field: string) => {
+  if (isEditMode.value && data) {
+    return `page.${field}`
+  }
+  return undefined
+}
 
 useHead({
   title: pageData.value?.title || 'Contact Me'

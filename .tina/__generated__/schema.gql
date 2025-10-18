@@ -96,10 +96,10 @@ type Page implements Node & Document {
   subheading: String
   backgroundImage: String
   contentTitle: String
-  content: String
-  body: String
-  paragraph1: String
-  paragraph2: String
+  content: JSON
+  body: JSON
+  paragraph1: JSON
+  paragraph2: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -119,16 +119,22 @@ input ImageFilter {
   in: [String]
 }
 
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
+}
+
 input PageFilter {
   title: StringFilter
   heading: StringFilter
   subheading: StringFilter
   backgroundImage: ImageFilter
   contentTitle: StringFilter
-  content: StringFilter
-  body: StringFilter
-  paragraph1: StringFilter
-  paragraph2: StringFilter
+  content: RichTextFilter
+  body: RichTextFilter
+  paragraph1: RichTextFilter
+  paragraph2: RichTextFilter
 }
 
 type PageConnectionEdges {
@@ -242,10 +248,10 @@ input PageMutation {
   subheading: String
   backgroundImage: String
   contentTitle: String
-  content: String
-  body: String
-  paragraph1: String
-  paragraph2: String
+  content: JSON
+  body: JSON
+  paragraph1: JSON
+  paragraph2: JSON
 }
 
 input Training_resourcesResourcesLinksMutation {

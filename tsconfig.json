@@ -4,7 +4,8 @@
     "module": "ESNext",
     "target": "ESNext",
     "moduleResolution": "bundler",
-    "types": ["@nuxt/types", "@nuxt/content"]
+    "resolveJsonModule": true,
+    "types": ["@nuxt/types", "@nuxt/content", "node"]
   }
 }
 

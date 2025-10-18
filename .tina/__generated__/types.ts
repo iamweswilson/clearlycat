@@ -190,10 +190,10 @@ export type Page = Node & Document & {
   subheading?: Maybe<Scalars['String']['output']>;
   backgroundImage?: Maybe<Scalars['String']['output']>;
   contentTitle?: Maybe<Scalars['String']['output']>;
-  content?: Maybe<Scalars['String']['output']>;
-  body?: Maybe<Scalars['String']['output']>;
-  paragraph1?: Maybe<Scalars['String']['output']>;
-  paragraph2?: Maybe<Scalars['String']['output']>;
+  content?: Maybe<Scalars['JSON']['output']>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  paragraph1?: Maybe<Scalars['JSON']['output']>;
+  paragraph2?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
@@ -213,16 +213,22 @@ export type ImageFilter = {
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
+export type RichTextFilter = {
+  startsWith?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type PageFilter = {
   title?: InputMaybe<StringFilter>;
   heading?: InputMaybe<StringFilter>;
   subheading?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
   contentTitle?: InputMaybe<StringFilter>;
-  content?: InputMaybe<StringFilter>;
-  body?: InputMaybe<StringFilter>;
-  paragraph1?: InputMaybe<StringFilter>;
-  paragraph2?: InputMaybe<StringFilter>;
+  content?: InputMaybe<RichTextFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  paragraph1?: InputMaybe<RichTextFilter>;
+  paragraph2?: InputMaybe<RichTextFilter>;
 };
 
 export type PageConnectionEdges = {
@@ -402,10 +408,10 @@ export type PageMutation = {
   subheading?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
   contentTitle?: InputMaybe<Scalars['String']['input']>;
-  content?: InputMaybe<Scalars['String']['input']>;
-  body?: InputMaybe<Scalars['String']['input']>;
-  paragraph1?: InputMaybe<Scalars['String']['input']>;
-  paragraph2?: InputMaybe<Scalars['String']['input']>;
+  content?: InputMaybe<Scalars['JSON']['input']>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  paragraph1?: InputMaybe<Scalars['JSON']['input']>;
+  paragraph2?: InputMaybe<Scalars['JSON']['input']>;
 };
 
 export type Training_ResourcesResourcesLinksMutation = {
@@ -434,7 +440,7 @@ export type Training_ResourcesMutation = {
   resources?: InputMaybe<Array<InputMaybe<Training_ResourcesResourcesMutation>>>;
 };
 
-export type PagePartsFragment = { __typename: 'Page', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null };
+export type PagePartsFragment = { __typename: 'Page', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: any | null, body?: any | null, paragraph1?: any | null, paragraph2?: any | null };
 
 export type Training_ResourcesPartsFragment = { __typename: 'Training_resources', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, resources?: Array<{ __typename: 'Training_resourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'Training_resourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'Training_resourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null };
 
@@ -443,7 +449,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: any | null, body?: any | null, paragraph1?: any | null, paragraph2?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -455,7 +461,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: string | null, body?: string | null, paragraph1?: string | null, paragraph2?: string | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'Page', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, content?: any | null, body?: any | null, paragraph1?: any | null, paragraph2?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
 
 export type Training_ResourcesQueryVariables = Exact<{
   relativePath: Scalars['String']['input'];
