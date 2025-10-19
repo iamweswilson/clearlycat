@@ -21,6 +21,11 @@ export default defineConfig({
     outputFolder: "admin",
     publicFolder: "public",
   },
+  
+  // Disable SDK generation for static builds
+  client: {
+    skip: true,
+  },
   media: {
     tina: {
       mediaRoot: "",
