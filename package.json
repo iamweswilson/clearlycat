@@ -10,7 +10,7 @@
     "build": "nuxt build",
     "build:tina": "tinacms build && nuxt build",
     "generate": "nuxt generate",
-    "generate:tina": "tinacms build && nuxt generate",
+    "generate:tina": "tinacms build --local --skip-cloud-checks && nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "tina:build": "tinacms build",

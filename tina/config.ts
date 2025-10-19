@@ -10,12 +10,11 @@ const branch =
 export default defineConfig({
   branch,
 
-  // Get this from tina.io
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || "local",
-  // Get this from tina.io
-  token: process.env.TINA_TOKEN || "local",
+  // Use local mode for both development and production
+  clientId: "local",
+  token: "local",
   
-  // Use local mode for development
+  // Enable local content for both dev and production
   localContent: true,
 
   build: {
