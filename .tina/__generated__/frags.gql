@@ -30,8 +30,13 @@ fragment PageParts on Page {
     subheading
     backgroundImage
     contentTitle
-    aboutImage
-    aboutImageAlt
+    aboutImage {
+      __typename
+      src
+      alt
+      width
+      height
+    }
     body
   }
 }

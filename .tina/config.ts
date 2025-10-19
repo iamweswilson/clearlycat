@@ -205,14 +205,36 @@ export default defineConfig({
                 label: 'Content Title',
               },
               {
-                type: 'image',
+                type: 'object',
                 name: 'aboutImage',
                 label: 'About Image',
-              },
-              {
-                type: 'string',
-                name: 'aboutImageAlt',
-                label: 'About Image Alt Text',
+                fields: [
+                  {
+                    type: 'image',
+                    name: 'src',
+                    label: 'Image',
+                    ui: {
+                      parse: (media) => `/img/${media.filename}`,
+                    },
+                  },
+                  {
+                    type: 'string',
+                    name: 'alt',
+                    label: 'Alt Text',
+                  },
+                  {
+                    type: 'number',
+                    name: 'width',
+                    label: 'Width (px)',
+                    description: 'Leave empty for default width',
+                  },
+                  {
+                    type: 'number',
+                    name: 'height',
+                    label: 'Height (px)',
+                    description: 'Leave empty for default height',
+                  },
+                ],
               },
               {
                 type: 'rich-text',

@@ -200,6 +200,14 @@ export type PageTrainingResources = Node & Document & {
   _values: Scalars['JSON']['output'];
 };
 
+export type PageStandardPageAboutImage = {
+  __typename?: 'PageStandardPageAboutImage';
+  src?: Maybe<Scalars['String']['output']>;
+  alt?: Maybe<Scalars['String']['output']>;
+  width?: Maybe<Scalars['Float']['output']>;
+  height?: Maybe<Scalars['Float']['output']>;
+};
+
 export type PageStandardPage = Node & Document & {
   __typename?: 'PageStandardPage';
   title: Scalars['String']['output'];
@@ -207,8 +215,7 @@ export type PageStandardPage = Node & Document & {
   subheading?: Maybe<Scalars['String']['output']>;
   backgroundImage?: Maybe<Scalars['String']['output']>;
   contentTitle?: Maybe<Scalars['String']['output']>;
-  aboutImage?: Maybe<Scalars['String']['output']>;
-  aboutImageAlt?: Maybe<Scalars['String']['output']>;
+  aboutImage?: Maybe<PageStandardPageAboutImage>;
   body?: Maybe<Scalars['JSON']['output']>;
   id: Scalars['ID']['output'];
   _sys: SystemInfo;
@@ -270,14 +277,30 @@ export type PageTrainingResourcesFilter = {
   resources?: InputMaybe<PageTrainingResourcesResourcesFilter>;
 };
 
+export type NumberFilter = {
+  lt?: InputMaybe<Scalars['Float']['input']>;
+  lte?: InputMaybe<Scalars['Float']['input']>;
+  gte?: InputMaybe<Scalars['Float']['input']>;
+  gt?: InputMaybe<Scalars['Float']['input']>;
+  eq?: InputMaybe<Scalars['Float']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+};
+
+export type PageStandardPageAboutImageFilter = {
+  src?: InputMaybe<ImageFilter>;
+  alt?: InputMaybe<StringFilter>;
+  width?: InputMaybe<NumberFilter>;
+  height?: InputMaybe<NumberFilter>;
+};
+
 export type PageStandardPageFilter = {
   title?: InputMaybe<StringFilter>;
   heading?: InputMaybe<StringFilter>;
   subheading?: InputMaybe<StringFilter>;
   backgroundImage?: InputMaybe<ImageFilter>;
   contentTitle?: InputMaybe<StringFilter>;
-  aboutImage?: InputMaybe<ImageFilter>;
-  aboutImageAlt?: InputMaybe<StringFilter>;
+  aboutImage?: InputMaybe<PageStandardPageAboutImageFilter>;
   body?: InputMaybe<RichTextFilter>;
 };
 
@@ -392,14 +415,20 @@ export type PageTrainingResourcesMutation = {
   resources?: InputMaybe<Array<InputMaybe<PageTrainingResourcesResourcesMutation>>>;
 };
 
+export type PageStandardPageAboutImageMutation = {
+  src?: InputMaybe<Scalars['String']['input']>;
+  alt?: InputMaybe<Scalars['String']['input']>;
+  width?: InputMaybe<Scalars['Float']['input']>;
+  height?: InputMaybe<Scalars['Float']['input']>;
+};
+
 export type PageStandardPageMutation = {
   title?: InputMaybe<Scalars['String']['input']>;
   heading?: InputMaybe<Scalars['String']['input']>;
   subheading?: InputMaybe<Scalars['String']['input']>;
   backgroundImage?: InputMaybe<Scalars['String']['input']>;
   contentTitle?: InputMaybe<Scalars['String']['input']>;
-  aboutImage?: InputMaybe<Scalars['String']['input']>;
-  aboutImageAlt?: InputMaybe<Scalars['String']['input']>;
+  aboutImage?: InputMaybe<PageStandardPageAboutImageMutation>;
   body?: InputMaybe<Scalars['JSON']['input']>;
 };
 
@@ -410,7 +439,7 @@ export type PageMutation = {
 
 type PageParts_PageTrainingResources_Fragment = { __typename: 'PageTrainingResources', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null };
 
-type PageParts_PageStandardPage_Fragment = { __typename: 'PageStandardPage', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, aboutImage?: string | null, aboutImageAlt?: string | null, body?: any | null };
+type PageParts_PageStandardPage_Fragment = { __typename: 'PageStandardPage', title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, aboutImage?: { __typename: 'PageStandardPageAboutImage', src?: string | null, alt?: string | null, width?: number | null, height?: number | null } | null };
 
 export type PagePartsFragment = PageParts_PageTrainingResources_Fragment | PageParts_PageStandardPage_Fragment;
 
@@ -419,7 +448,7 @@ export type PageQueryVariables = Exact<{
 }>;
 
 
-export type PageQuery = { __typename?: 'Query', page: { __typename: 'PageTrainingResources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageStandardPage', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, aboutImage?: string | null, aboutImageAlt?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } };
+export type PageQuery = { __typename?: 'Query', page: { __typename: 'PageTrainingResources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageStandardPage', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, aboutImage?: { __typename: 'PageStandardPageAboutImage', src?: string | null, alt?: string | null, width?: number | null, height?: number | null } | null } };
 
 export type PageConnectionQueryVariables = Exact<{
   before?: InputMaybe<Scalars['String']['input']>;
@@ -431,7 +460,7 @@ export type PageConnectionQueryVariables = Exact<{
 }>;
 
 
-export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'PageTrainingResources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageStandardPage', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, aboutImage?: string | null, aboutImageAlt?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string } } | null } | null> | null } };
+export type PageConnectionQuery = { __typename?: 'Query', pageConnection: { __typename?: 'PageConnection', totalCount: number, pageInfo: { __typename?: 'PageInfo', hasPreviousPage: boolean, hasNextPage: boolean, startCursor: string, endCursor: string }, edges?: Array<{ __typename?: 'PageConnectionEdges', cursor: string, node?: { __typename: 'PageTrainingResources', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, resources?: Array<{ __typename: 'PageTrainingResourcesResources', title: string, showDivider?: boolean | null, links?: Array<{ __typename: 'PageTrainingResourcesResourcesLinks', text: string, url: string } | null> | null, images?: Array<{ __typename: 'PageTrainingResourcesResourcesImages', src: string, alt?: string | null, link?: string | null } | null> | null } | null> | null } | { __typename: 'PageStandardPage', id: string, title: string, heading: string, subheading?: string | null, backgroundImage?: string | null, contentTitle?: string | null, body?: any | null, _sys: { __typename?: 'SystemInfo', filename: string, basename: string, hasReferences?: boolean | null, breadcrumbs: Array<string>, path: string, relativePath: string, extension: string }, aboutImage?: { __typename: 'PageStandardPageAboutImage', src?: string | null, alt?: string | null, width?: number | null, height?: number | null } | null } | null } | null> | null } };
 
 export const PagePartsFragmentDoc = gql`
     fragment PageParts on Page {
@@ -466,8 +495,13 @@ export const PagePartsFragmentDoc = gql`
     subheading
     backgroundImage
     contentTitle
-    aboutImage
-    aboutImageAlt
+    aboutImage {
+      __typename
+      src
+      alt
+      width
+      height
+    }
     body
   }
 }

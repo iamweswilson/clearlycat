@@ -118,14 +118,20 @@ type PageTrainingResources implements Node & Document {
   _values: JSON!
 }
 
+type PageStandardPageAboutImage {
+  src: String
+  alt: String
+  width: Float
+  height: Float
+}
+
 type PageStandardPage implements Node & Document {
   title: String!
   heading: String!
   subheading: String
   backgroundImage: String
   contentTitle: String
-  aboutImage: String
-  aboutImageAlt: String
+  aboutImage: PageStandardPageAboutImage
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -187,14 +193,30 @@ input PageTrainingResourcesFilter {
   resources: PageTrainingResourcesResourcesFilter
 }
 
+input NumberFilter {
+  lt: Float
+  lte: Float
+  gte: Float
+  gt: Float
+  eq: Float
+  exists: Boolean
+  in: [Float]
+}
+
+input PageStandardPageAboutImageFilter {
+  src: ImageFilter
+  alt: StringFilter
+  width: NumberFilter
+  height: NumberFilter
+}
+
 input PageStandardPageFilter {
   title: StringFilter
   heading: StringFilter
   subheading: StringFilter
   backgroundImage: ImageFilter
   contentTitle: StringFilter
-  aboutImage: ImageFilter
-  aboutImageAlt: StringFilter
+  aboutImage: PageStandardPageAboutImageFilter
   body: RichTextFilter
 }
 
@@ -261,14 +283,20 @@ input PageTrainingResourcesMutation {
   resources: [PageTrainingResourcesResourcesMutation]
 }
 
+input PageStandardPageAboutImageMutation {
+  src: String
+  alt: String
+  width: Float
+  height: Float
+}
+
 input PageStandardPageMutation {
   title: String
   heading: String
   subheading: String
   backgroundImage: String
   contentTitle: String
-  aboutImage: String
-  aboutImageAlt: String
+  aboutImage: PageStandardPageAboutImageMutation
   body: JSON
 }
 
