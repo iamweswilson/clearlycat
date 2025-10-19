@@ -5,6 +5,14 @@
 [build.environment]
   NODE_VERSION = "20"
 
+# Serve TinaCMS admin files directly (don't redirect to Nuxt)
+[[redirects]]
+  from = "/admin/*"
+  to = "/admin/:splat"
+  status = 200
+  force = true
+
+# SPA fallback for all other routes
 [[redirects]]
   from = "/*"
   to = "/index.html"
