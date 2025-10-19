@@ -6,7 +6,7 @@ fragment PageParts on Page {
     subheading
     backgroundImage
     contentTitle
-    content
+    body
     resources {
       __typename
       title
@@ -30,6 +30,6 @@ fragment PageParts on Page {
     subheading
     backgroundImage
     contentTitle
-    content
+    body
   }
 }

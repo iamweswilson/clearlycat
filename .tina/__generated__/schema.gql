@@ -111,7 +111,7 @@ type PageTrainingResources implements Node & Document {
   subheading: String
   backgroundImage: String
   contentTitle: String
-  content: String
+  body: JSON
   resources: [PageTrainingResourcesResources]
   id: ID!
   _sys: SystemInfo!
@@ -124,7 +124,7 @@ type PageStandardPage implements Node & Document {
   subheading: String
   backgroundImage: String
   contentTitle: String
-  content: String
+  body: JSON
   id: ID!
   _sys: SystemInfo!
   _values: JSON!
@@ -144,6 +144,12 @@ input ImageFilter {
   eq: String
   exists: Boolean
   in: [String]
+}
+
+input RichTextFilter {
+  startsWith: String
+  eq: String
+  exists: Boolean
 }
 
 input PageTrainingResourcesResourcesLinksFilter {
@@ -175,7 +181,7 @@ input PageTrainingResourcesFilter {
   subheading: StringFilter
   backgroundImage: ImageFilter
   contentTitle: StringFilter
-  content: StringFilter
+  body: RichTextFilter
   resources: PageTrainingResourcesResourcesFilter
 }
 
@@ -185,7 +191,7 @@ input PageStandardPageFilter {
   subheading: StringFilter
   backgroundImage: ImageFilter
   contentTitle: StringFilter
-  content: StringFilter
+  body: RichTextFilter
 }
 
 input PageFilter {
@@ -247,7 +253,7 @@ input PageTrainingResourcesMutation {
   subheading: String
   backgroundImage: String
   contentTitle: String
-  content: String
+  body: JSON
   resources: [PageTrainingResourcesResourcesMutation]
 }
 
@@ -257,7 +263,7 @@ input PageStandardPageMutation {
   subheading: String
   backgroundImage: String
   contentTitle: String
-  content: String
+  body: JSON
 }
 
 input PageMutation {

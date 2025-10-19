@@ -16,9 +16,9 @@
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-16">
       <div class="max-w-5xl mx-auto">
-        <p class="mb-8">
-          Are you looking for a strategy, tool, or other resource that was shared at one of my recent trainings or seminars? That's what this page is all about. I've created dozens of resources, and am passionate about getting to share them with you for you to use with your students--and they are all free! If you don't see something or have trouble finding something from the seminar you attended, please <NuxtLink to="/contact" class="text-primary hover:underline">contact me</NuxtLink>.
-        </p>
+        <div class="mb-8" :data-tina-field="tinaField(pageData, 'body')">
+          <RichTextRenderer :body="pageData?.body" />
+        </div>
 
         <!-- All Resources -->
         <div v-for="(resource, index) in resources" :key="resource.title" class="mb-8">
@@ -49,6 +49,8 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
 interface ResourceImage {
   src: string
   alt?: string

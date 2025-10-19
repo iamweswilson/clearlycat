@@ -24,8 +24,8 @@
             <h2 class="text-3xl font-bold mb-4" :data-tina-field="tinaField(pageData, 'contentTitle')">
               {{ pageData?.contentTitle }}
             </h2>
-            <div class="whitespace-pre-line" :data-tina-field="tinaField(pageData, 'content')">
-              {{ pageData?.content }}
+            <div :data-tina-field="tinaField(pageData, 'body')">
+              <RichTextRenderer :body="pageData?.body" />
             </div>
           </div>
         </div>
@@ -35,6 +35,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import client from '~/.tina/__generated__/client'
 
 // Check if we're in edit mode

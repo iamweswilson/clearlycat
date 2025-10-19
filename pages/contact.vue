@@ -16,7 +16,9 @@
     <!-- Main Content -->
     <div class="container mx-auto px-4 py-16">
       <div class="max-w-4xl mx-auto">
-        <p class="mb-8">Want to get in touch with me? Fill out the form below to send me a message and I will try to get back to you as soon as possible!</p>
+        <div class="mb-8" :data-tina-field="tinaField(pageData, 'body')">
+          <RichTextRenderer :body="pageData?.body" />
+        </div>
         
         <form name="contact" action="/thank-you" method="POST" data-netlify="true">
           <input type="hidden" name="form-name" value="contact">
@@ -67,6 +69,7 @@
 </template>
 
 <script setup lang="ts">
+import { ref, onMounted } from 'vue'
 import client from '~/.tina/__generated__/client'
 
 // Check if we're in edit mode

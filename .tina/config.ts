@@ -7,10 +7,10 @@ export default defineConfig({
   branch,
   
   // Get this from tina.io (optional for local-only development)
-  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID,
+  clientId: process.env.NEXT_PUBLIC_TINA_CLIENT_ID || null,
   
   // Get this from tina.io (optional for local-only development)
-  token: process.env.TINA_TOKEN,
+  token: process.env.TINA_TOKEN || null,
 
   build: {
     outputFolder: 'admin',
@@ -79,11 +79,12 @@ export default defineConfig({
                 label: 'Content Title',
               },
               {
-                type: 'string',
-                name: 'content',
-                label: 'Content',
-                ui: {
-                  component: 'textarea',
+                type: 'rich-text',
+                name: 'body',
+                label: 'Body',
+                isBody: true,
+                parser: {
+                  type: 'markdown',
                 },
               },
               {
@@ -204,11 +205,12 @@ export default defineConfig({
                 label: 'Content Title',
               },
               {
-                type: 'string',
-                name: 'content',
-                label: 'Content',
-                ui: {
-                  component: 'textarea',
+                type: 'rich-text',
+                name: 'body',
+                label: 'Body',
+                isBody: true,
+                parser: {
+                  type: 'markdown',
                 },
               },
             ],
