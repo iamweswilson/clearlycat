@@ -19,16 +19,15 @@
         <div class="grid md:grid-cols-12 gap-8">
           <div class="md:col-span-5">
             <div>
-              <img 
-                :src="pageData?.aboutImage?.src || '/img/about-cat.jpg'" 
-                :alt="pageData?.aboutImage?.alt || 'Catherine Wilson'" 
-                class="rounded-lg shadow-lg"
-                :style="getImageStyle(pageData?.aboutImage)"
-                :data-tina-field="tinaField(pageData, 'aboutImage.src')"
-              >
-              <div :data-tina-field="tinaField(pageData, 'aboutImage.alt')" style="display: none;">{{ pageData?.aboutImage?.alt }}</div>
-              <div :data-tina-field="tinaField(pageData, 'aboutImage.width')" style="display: none;">{{ pageData?.aboutImage?.width }}</div>
-              <div :data-tina-field="tinaField(pageData, 'aboutImage.height')" style="display: none;">{{ pageData?.aboutImage?.height }}</div>
+              <div :data-tina-field="tinaField(pageData, 'aboutImage')">
+                <img 
+                  :src="pageData?.aboutImage?.src || '/img/about-cat.jpg'" 
+                  :alt="pageData?.aboutImage?.alt || 'Catherine Wilson'" 
+                  class="rounded-lg shadow-lg"
+                  :style="getImageStyle(pageData?.aboutImage)"
+                  :data-tina-field="tinaField(pageData, 'aboutImage.src')"
+                >
+              </div>
             </div>
           </div>
           <div class="md:col-span-7">

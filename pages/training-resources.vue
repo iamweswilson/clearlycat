@@ -21,19 +21,19 @@
         </div>
 
         <!-- All Resources -->
-        <div v-for="(resource, index) in resources" :key="resource.title" class="mb-8">
+        <div v-for="(resource, index) in resources" :key="resource.title" class="mb-8" :data-tina-field="tinaField(pageData, `resources.${index}`)">
           <h3 class="text-2xl font-bold mb-3" :data-tina-field="tinaField(pageData, `resources.${index}.title`)">{{ resource.title }}</h3>
           
           <!-- Links -->
-          <div v-for="(link, linkIndex) in resource.links" :key="link.url" class="mb-2">
-            <a :href="link.url" class="resource-btn" target="_blank" :data-tina-field="tinaField(pageData, `resources.${index}.links.${linkIndex}`)">
+          <div v-for="(link, linkIndex) in resource.links" :key="link.url" class="mb-2" :data-tina-field="tinaField(pageData, `resources.${index}.links.${linkIndex}`)">
+            <a :href="link.url" class="resource-btn" target="_blank" :data-tina-field="tinaField(pageData, `resources.${index}.links.${linkIndex}.text`)">
               {{ link.text }}
             </a>
           </div>
           
           <!-- Images Gallery -->
-          <div v-if="resource.images && resource.images.length > 0" class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div v-for="(image, imageIndex) in resource.images" :key="imageIndex">
+          <div v-if="resource.images && resource.images.length > 0" class="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4" :data-tina-field="tinaField(pageData, `resources.${index}.images`)">
+            <div v-for="(image, imageIndex) in resource.images" :key="imageIndex" :data-tina-field="tinaField(pageData, `resources.${index}.images.${imageIndex}`)">
               <a v-if="image.link" :href="image.link" target="_blank">
                 <img :src="image.src" :alt="image.alt || ''" class="resource-image" :data-tina-field="tinaField(pageData, `resources.${index}.images.${imageIndex}.src`)">
               </a>
@@ -41,7 +41,7 @@
             </div>
           </div>
           
-          <hr v-if="resource.showDivider" class="my-6">
+          <hr v-if="resource.showDivider" class="my-6" :data-tina-field="tinaField(pageData, `resources.${index}.showDivider`)">
         </div>
       </div>
     </div>

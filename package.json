@@ -14,7 +14,8 @@
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "tina:build": "tinacms build",
-    "tina:dev": "tinacms dev -c \"nuxt dev\""
+    "tina:dev": "tinacms dev -c \"nuxt dev\"",
+    "tina:init": "tinacms init backend"
   },
   "dependencies": {
     "@nuxt/content": "^2.13.2",
@@ -26,6 +27,7 @@
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@tinacms/cli": "^1.6.7",
+    "@types/node": "^24.8.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.15",
