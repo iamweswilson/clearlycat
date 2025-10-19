@@ -18,7 +18,7 @@
       <div class="max-w-6xl mx-auto">
         <div class="grid md:grid-cols-12 gap-8">
           <div class="md:col-span-5">
-            <img src="/img/about-cat.jpg" alt="Catherine Wilson" class="w-full rounded-lg shadow-lg">
+            <img :src="pageData?.aboutImage || '/img/about-cat.jpg'" :alt="pageData?.aboutImageAlt || 'Catherine Wilson'" class="w-full rounded-lg shadow-lg" :data-tina-field="tinaField(pageData, 'aboutImage')">
           </div>
           <div class="md:col-span-7">
             <h2 class="text-3xl font-bold mb-4" :data-tina-field="tinaField(pageData, 'contentTitle')">

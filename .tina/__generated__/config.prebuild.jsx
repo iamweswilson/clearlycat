@@ -196,6 +196,16 @@ var config_default = defineConfig({
                 label: "Content Title"
               },
               {
+                type: "image",
+                name: "aboutImage",
+                label: "About Image"
+              },
+              {
+                type: "string",
+                name: "aboutImageAlt",
+                label: "About Image Alt Text"
+              },
+              {
                 type: "rich-text",
                 name: "body",
                 label: "Body",

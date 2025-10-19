@@ -124,6 +124,8 @@ type PageStandardPage implements Node & Document {
   subheading: String
   backgroundImage: String
   contentTitle: String
+  aboutImage: String
+  aboutImageAlt: String
   body: JSON
   id: ID!
   _sys: SystemInfo!
@@ -191,6 +193,8 @@ input PageStandardPageFilter {
   subheading: StringFilter
   backgroundImage: ImageFilter
   contentTitle: StringFilter
+  aboutImage: ImageFilter
+  aboutImageAlt: StringFilter
   body: RichTextFilter
 }
 
@@ -263,6 +267,8 @@ input PageStandardPageMutation {
   subheading: String
   backgroundImage: String
   contentTitle: String
+  aboutImage: String
+  aboutImageAlt: String
   body: JSON
 }
 
