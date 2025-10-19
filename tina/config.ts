@@ -36,119 +36,79 @@ export default defineConfig({
         label: "Pages",
         path: "content/pages",
         format: "json",
-        fields: [
+        templates: [
           {
-            type: "string",
-            name: "title",
-            label: "Page Title",
-            required: true,
-          },
-          {
-            type: "string",
-            name: "heading",
-            label: "Main Heading",
-            required: true,
-          },
-          {
-            type: "string",
-            name: "subheading",
-            label: "Subheading",
-          },
-          {
-            type: "image",
-            name: "backgroundImage",
-            label: "Background Image",
-            description: "Background image for the page header",
-          },
-          {
-            type: "string",
-            name: "contentTitle",
-            label: "Content Title",
-            description: "Main title for the content section",
-          },
-          {
-            type: "object",
-            name: "aboutImage",
-            label: "About Image",
-            fields: [
-              {
-                type: "image",
-                name: "src",
-                label: "Image",
-                required: true,
-              },
-              {
-                type: "string",
-                name: "alt",
-                label: "Alt Text",
-                required: true,
-              },
-              {
-                type: "number",
-                name: "width",
-                label: "Width (px)",
-                description: "Leave empty for auto width",
-              },
-              {
-                type: "number",
-                name: "height",
-                label: "Height (px)",
-                description: "Leave empty for auto height",
-              },
-            ],
-          },
-          {
-            type: "rich-text",
-            name: "body",
-            label: "Page Content",
-            isBody: true,
-          },
-          {
-            type: "object",
-            name: "resources",
-            label: "Resources",
-            list: true,
-            itemProps: (item) => {
-              return { label: item?.title || "New Resource" }
-            },
+            name: "standardPage",
+            label: "Standard Page",
             fields: [
               {
                 type: "string",
                 name: "title",
-                label: "Resource Title",
+                label: "Page Title",
                 required: true,
               },
               {
-                type: "object",
-                name: "links",
-                label: "Links",
-                list: true,
-                itemProps: (item) => {
-                  return { label: item?.text || "New Link" }
-                },
-                fields: [
-                  {
-                    type: "string",
-                    name: "text",
-                    label: "Link Text",
-                    required: true,
-                  },
-                  {
-                    type: "string",
-                    name: "url",
-                    label: "URL",
-                    required: true,
-                  },
-                ],
+                type: "string",
+                name: "heading",
+                label: "Main Heading",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "subheading",
+                label: "Subheading",
+              },
+              {
+                type: "image",
+                name: "backgroundImage",
+                label: "Background Image",
+                description: "Background image for the page header",
+              },
+              {
+                type: "rich-text",
+                name: "body",
+                label: "Page Content",
+                isBody: true,
+              },
+            ],
+          },
+          {
+            name: "aboutPage",
+            label: "About Page",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Page Title",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "heading",
+                label: "Main Heading",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "subheading",
+                label: "Subheading",
+              },
+              {
+                type: "image",
+                name: "backgroundImage",
+                label: "Background Image",
+                description: "Background image for the page header",
+              },
+              {
+                type: "string",
+                name: "contentTitle",
+                label: "Content Title",
+                description: "Main title for the content section",
               },
               {
                 type: "object",
-                name: "images",
-                label: "Images",
-                list: true,
-                itemProps: (item) => {
-                  return { label: item?.alt || item?.src?.split('/').pop() || "New Image" }
-                },
+                name: "aboutImage",
+                label: "About Image",
                 fields: [
                   {
                     type: "image",
@@ -160,19 +120,135 @@ export default defineConfig({
                     type: "string",
                     name: "alt",
                     label: "Alt Text",
+                    required: true,
                   },
                   {
-                    type: "string",
-                    name: "link",
-                    label: "Image Link (optional)",
+                    type: "number",
+                    name: "width",
+                    label: "Width (px)",
+                    description: "Leave empty for auto width",
+                  },
+                  {
+                    type: "number",
+                    name: "height",
+                    label: "Height (px)",
+                    description: "Leave empty for auto height",
                   },
                 ],
               },
               {
-                type: "boolean",
-                name: "showDivider",
-                label: "Show Divider",
-                default: false,
+                type: "rich-text",
+                name: "body",
+                label: "Page Content",
+                isBody: true,
+              },
+            ],
+          },
+          {
+            name: "trainingResources",
+            label: "Training Resources Page",
+            fields: [
+              {
+                type: "string",
+                name: "title",
+                label: "Page Title",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "heading",
+                label: "Main Heading",
+                required: true,
+              },
+              {
+                type: "string",
+                name: "subheading",
+                label: "Subheading",
+              },
+              {
+                type: "image",
+                name: "backgroundImage",
+                label: "Background Image",
+                description: "Background image for the page header",
+              },
+              {
+                type: "rich-text",
+                name: "body",
+                label: "Page Content",
+                isBody: true,
+              },
+              {
+                type: "object",
+                name: "resources",
+                label: "Resources",
+                list: true,
+                itemProps: (item) => {
+                  return { label: item?.title || "New Resource" }
+                },
+                fields: [
+                  {
+                    type: "string",
+                    name: "title",
+                    label: "Resource Title",
+                    required: true,
+                  },
+                  {
+                    type: "object",
+                    name: "links",
+                    label: "Links",
+                    list: true,
+                    itemProps: (item) => {
+                      return { label: item?.text || "New Link" }
+                    },
+                    fields: [
+                      {
+                        type: "string",
+                        name: "text",
+                        label: "Link Text",
+                        required: true,
+                      },
+                      {
+                        type: "string",
+                        name: "url",
+                        label: "URL",
+                        required: true,
+                      },
+                    ],
+                  },
+                  {
+                    type: "object",
+                    name: "images",
+                    label: "Images",
+                    list: true,
+                    itemProps: (item) => {
+                      return { label: item?.alt || item?.src?.split('/').pop() || "New Image" }
+                    },
+                    fields: [
+                      {
+                        type: "image",
+                        name: "src",
+                        label: "Image",
+                        required: true,
+                      },
+                      {
+                        type: "string",
+                        name: "alt",
+                        label: "Alt Text",
+                      },
+                      {
+                        type: "string",
+                        name: "link",
+                        label: "Image Link (optional)",
+                      },
+                    ],
+                  },
+                  {
+                    type: "boolean",
+                    name: "showDivider",
+                    label: "Show Divider",
+                    default: false,
+                  },
+                ],
               },
             ],
           },
