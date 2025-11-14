@@ -8,6 +8,11 @@
     @apply text-gray-800;
   }
 
+  a {
+    @apply underline;
+    @apply text-primary;
+  }
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-lora;
     @apply font-bold;
@@ -52,17 +57,17 @@
     @apply bg-transparent;
     @apply z-50;
     @apply transition-all duration-300;
-    background: transparent !important;
+    background: transparent;
   }
 
   .navbar .container {
     @apply bg-transparent;
-    background: transparent !important;
+    background: transparent;
   }
 
   .navbar .container > div {
     @apply bg-transparent;
-    background: transparent !important;
+    background: transparent;
   }
 
   .navbar-brand {
@@ -78,7 +83,7 @@
   }
 
   .nav-link {
-    @apply px-4 py-2;
+    @apply pr-8 py-2;
     @apply text-white;
     @apply hover:text-gray-200;
     @apply transition-colors;
@@ -86,6 +91,7 @@
     @apply text-sm;
     @apply uppercase;
     @apply tracking-wide;
+    @apply no-underline;
   }
 
   .post-preview h2 {
@@ -172,6 +178,34 @@
     @apply text-center;
     @apply text-gray-600;
     @apply text-sm;
+  }
+
+  .navbar--mobile-open {
+    @apply bg-gray-900 shadow-lg;
+
+  }
+
+  @media (min-width: 768px) {
+    .navbar--mobile-open {
+      @apply shadow-none;
+      background: transparent;
+    }
+
+    .navbar--mobile-open .nav-link {
+      @apply text-white hover:text-gray-200;
+    }
+  }
+
+  .navbar--mobile-open .nav-link {
+    @apply text-white;
+    @apply hover:text-primary;
+  }
+
+  .mobile-menu {
+    @apply bg-gray-900;
+    @apply rounded-b-lg;
+    @apply shadow-lg;
+    @apply py-4;
   }
 }
 

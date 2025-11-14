@@ -1,11 +1,11 @@
 <template>
   <div class="rich-text-content">
     <!-- Handle string format (plain text or markdown) -->
-    <div v-if="typeof body === 'string'">
-      <div v-for="(paragraph, index) in body.split('\n\n')" :key="index" class="mb-4">
-        {{ paragraph }}
-      </div>
-    </div>
+    <div
+      v-if="isStringBody"
+      class="prose max-w-none prose-a:text-primary prose-headings:font-lora prose-p:font-open-sans"
+      v-html="renderedMarkdown"
+    />
     
     <!-- Handle JSON object format -->
     <div v-else-if="body && body.children">
@@ -83,6 +83,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
+import { marked } from 'marked'
+
 interface TextNode {
   type: 'text'
   text: string
@@ -103,6 +106,12 @@ interface Props {
 
 const props = defineProps<Props>()
 
+const isStringBody = computed(() => typeof props.body === 'string' && !!props.body.trim())
+
+const renderedMarkdown = computed(() => {
+  if (!isStringBody.value) return ''
+  return marked.parse(props.body as string, { breaks: true })
+})
 
 const getTextClasses = (node: TextNode) => {
   const classes = []

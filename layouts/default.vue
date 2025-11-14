@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-screen flex flex-col">
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav :class="['navbar', { 'navbar--mobile-open': mobileMenuOpen }]">
       <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
           <!-- Logo -->
@@ -12,7 +12,7 @@
           <!-- Mobile menu button -->
           <button 
             @click="mobileMenuOpen = !mobileMenuOpen"
-            class="md:hidden text-white hover:text-gray-200 focus:outline-none"
+            class="md:hidden text-white hover:text-gray-200 focus:outline-none transition-colors"
             aria-label="Toggle navigation"
           >
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,7 +32,7 @@
         </div>
 
         <!-- Mobile Navigation -->
-        <div v-show="mobileMenuOpen" class="md:hidden pb-4">
+        <div v-show="mobileMenuOpen" class="mobile-menu md:hidden mt-2">
           <div class="flex flex-col space-y-2">
             <NuxtLink to="/" class="nav-link" @click="mobileMenuOpen = false">Home</NuxtLink>
             <NuxtLink to="/about" class="nav-link" @click="mobileMenuOpen = false">About Me</NuxtLink>
@@ -52,7 +52,7 @@
 
     <!-- Footer -->
     <footer class="mt-auto">
-      <hr class="border-gray-200">
+
       <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
           <p class="copyright">Copyright &copy; Thinking In Common {{ currentYear }}</p>
