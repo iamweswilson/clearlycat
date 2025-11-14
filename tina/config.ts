@@ -7,15 +7,21 @@ const branch =
   process.env.HEAD ||
   "main";
 
+const clientId =
+  process.env.NEXT_PUBLIC_TINA_CLIENT_ID ||
+  process.env.TINA_CLIENT_ID ||
+  "local";
+const token = process.env.TINA_TOKEN || "local";
+const useLocalContent = clientId === "local" || token === "local";
+
 export default defineConfig({
   branch,
 
-  // Use local mode for both development and production
-  clientId: "local",
-  token: "local",
-  
-  // Enable local content for both dev and production
-  localContent: true,
+  clientId,
+  token,
+
+  // Only use localContent when running in local mode
+  localContent: useLocalContent,
 
   build: {
     outputFolder: "admin",
