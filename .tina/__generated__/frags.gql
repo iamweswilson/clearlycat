@@ -1,0 +1,42 @@
+fragment PageParts on Page {
+  __typename
+  ... on PageTrainingResources {
+    title
+    heading
+    subheading
+    backgroundImage
+    contentTitle
+    body
+    resources {
+      __typename
+      title
+      links {
+        __typename
+        text
+        url
+      }
+      images {
+        __typename
+        src
+        alt
+        link
+      }
+      showDivider
+    }
+  }
+  ... on PageStandardPage {
+    title
+    heading
+    subheading
+    backgroundImage
+    contentTitle
+    aboutImage {
+      __typename
+      src
+      alt
+      width
+      height
+    }
+    body
+  }
+}
