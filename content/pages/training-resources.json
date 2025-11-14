@@ -1,10 +1,9 @@
 {
-  "_template": "trainingResources",
   "title": "Training Resources",
   "heading": "Training Resources",
   "subheading": "Get what you need here.",
   "backgroundImage": "/img/bkgd-2.jpg",
-  "body": "Are you looking for a strategy, tool, or other resource that was shared at one of my recent trainings or seminars? That's what this page is all about. I've created dozens of resources, and am passionate about getting to share them with you for you to use with your students--and they are all free! If you don't see something or have trouble finding something from the seminar you attended, please contact me.",
+  "body": "Are you looking for a strategy, tool, or other resource that was shared at one of my recent trainings or seminars? That's what this page is all about. I've created dozens of resources, and am passionate about getting to share them with you for you to use with your students--and they are all free! If you don't see something or have trouble finding something from the seminar you attended, please [contact me](/contact).\n",
   "resources": [
     {
       "title": "Hubert H. Humphrey Middle School",
@@ -701,14 +700,14 @@
           "url": "//www.smore.com/kskc3"
         }
       ],
-      "showDivider": false,
       "images": [
         {
           "src": "/img/smore1.jpg",
           "alt": "Utilizing Technology Flyer",
           "link": "//www.smore.com/kskc3"
         }
-      ]
+      ],
+      "showDivider": false
     },
     {
       "title": "Tech for Tots",
@@ -718,14 +717,15 @@
           "url": "//www.smore.com/gf4hm"
         }
       ],
-      "showDivider": false,
       "images": [
         {
           "src": "/img/smore2.jpg",
           "alt": "Tech for Tots Flyer",
           "link": "//www.smore.com/gf4hm"
         }
-      ]
+      ],
+      "showDivider": false
     }
-  ]
+  ],
+  "_template": "trainingResources"
 }
